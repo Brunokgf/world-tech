@@ -1,0 +1,311 @@
+
+<!DOCTYPE html> 
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Telefones</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+nav .carrinho-btn { cursor:pointer; background:#1e90ff; padding:5px 10px; border-radius:5px; }
+nav .carrinho-btn:hover { background:#0a65c0; }
+.search-bar { display:flex; justify-content:center; padding:15px; background:#f1f1f1; }
+.search-bar input { width:50%; padding:10px; border:1px solid #ccc; border-radius:5px 0 0 5px; outline:none; }
+.search-bar button { padding:10px 20px; border:none; background:#1e90ff; color:#fff; border-radius:0 5px 5px 0; cursor:pointer; font-weight:bold; }
+.search-bar button:hover { background:#0a65c0; }
+.banner { width:100%; display:block; margin-bottom:20px; }
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { text-align:center; margin-bottom:20px; }
+.produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+.produto { background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:15px; text-align:center; transition:0.3s; }
+.produto:hover { transform:translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.produto img { max-width:100%; height:150px; object-fit:contain; margin-bottom:10px; cursor:pointer; }
+.produto h3 { font-size:16px; margin-bottom:8px; }
+.produto p { font-size:14px; margin-bottom:8px; }
+.preco { font-size:16px; font-weight:bold; color:#1e90ff; margin-bottom:12px; }
+.btn { display:inline-block; background:#1e90ff; color:white; padding:10px 15px; border-radius:5px; text-decoration:none; cursor:pointer; }
+.btn:hover { background:#0a65c0; }
+
+#carrinho { position:fixed; top:70px; right:20px; width:280px; max-height:400px; overflow-y:auto; background:white; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.3); padding:10px; display:none; z-index:1000; }
+#carrinho h3 { margin-top:0; text-align:center; }
+#carrinho p { margin:5px 0; }
+
+.checkout-btn {
+  display:block;
+  width:100%;
+  text-align:center;
+  background:#28a745;
+  color:#fff;
+  padding:10px;
+  border-radius:6px;
+  font-weight:bold;
+  text-decoration:none;
+  margin-top:10px;
+  transition:0.3s;
+}
+.checkout-btn:hover { background:#218838; }
+
+.remove-btn {
+  background:transparent;
+  border:none;
+  color:red;
+  cursor:pointer;
+  font-size:14px;
+  margin-left:5px;
+}
+
+/* Modal estilo */
+.modal {
+  display:none; 
+  position:fixed; 
+  z-index:2000; 
+  padding-top:60px; 
+  left:0; top:0; 
+  width:100%; height:100%; 
+  overflow:auto; 
+  background-color:rgba(0,0,0,0.9);
+}
+.modal-conteudo {
+  margin:auto; 
+  display:block; 
+  max-width:80%; 
+  max-height:80%;
+}
+#caption {
+  margin:auto; 
+  display:block; 
+  text-align:center; 
+  color:#ccc; 
+  padding:10px; 
+}
+.fechar {
+  position:absolute; 
+  top:20px; right:35px; 
+  color:#fff; 
+  font-size:40px; 
+  font-weight:bold; 
+  cursor:pointer;
+}
+.fechar:hover { color:#bbb; }
+</style>
+</head>
+<body>
+<header>
+<img src="37ef314a-4d5b-46f2-8e9f-050c2ff3ee03.png" alt="World Tech Logo">
+</header>
+
+<nav>
+<a href="world-itens%20tecnologicos.html">Telefones</a>
+<a href="fone-de-ouvido.html">Fones de Ouvido</a>
+<a href="impressora.html">Impressoras</a>
+<a href="computadores.html">Computadores</a>
+<a href="escritorio.html">Escritório</a>
+<a href="acessorio.html">Acessórios</a>
+<a href="Games&consoles%20-%20Copia.html">games&console</a>
+<a href="carrinho.html" class="carrinho-btn">Carrinho 🛒</a>
+
+</nav>
+<!-- Barra de busca funcional -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+  <button id="searchBtn">Pesquisar</button>
+</div>
+
+<style>
+/* Estilo da barra de busca */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f1f1f1;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1 1 300px;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  min-width: 150px;
+}
+
+.search-bar button {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border: none;
+  background: #1e90ff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-bar button:hover {
+  background: #0a65c0;
+}
+</style>
+
+<script>
+// Função para filtrar produtos
+function filtrarProdutos() {
+  const searchValue = document.getElementById('searchInput').value.toLowerCase();
+  const produtos = document.querySelectorAll('.produto');
+
+  produtos.forEach(produto => {
+    const nome = produto.querySelector('h3').innerText.toLowerCase();
+    if(nome.includes(searchValue) || searchValue === "") {
+      produto.style.display = 'block';
+    } else {
+      produto.style.display = 'none';
+    }
+  });
+}
+
+// Executa ao clicar no botão
+document.getElementById('searchBtn').addEventListener('click', filtrarProdutos);
+
+// Executa ao pressionar Enter no campo de busca
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if(e.key === 'Enter') {
+    e.preventDefault();
+    filtrarProdutos();
+  }
+});
+</script>
+
+
+
+<section>
+<img src="img certa 2.0.png" class="banner" alt="Promoção World Tech">
+</section>
+
+<div class="container">
+<h2>Telefones</h2>
+<div class="produtos">
+<div class="produto"><img src="morola.g15.1.webp" alt="Motorola G15"><h3>Motorola G15</h3><p>Intermediário acessível, bom para uso diário.</p><div class="preco">R$ 799,00</div><a class="btn" onclick="verProduto('Motorola G15','R$ 799,00','Intermediário acessível, bom para uso diário ','motorola g15.jpeg','motorola g15 2.webp','motorolag15 3.webp')"href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="realme 10.jpeg" alt="Realme 10"><h3>Realme 10</h3><p>Smartphone intermediário com boa tela e desempenho.</p><div class="preco">R$ 849,00</div><a class="btn" onclick="verProduto('Realme 10','R$ 849,00','Smartphone intermediário com boa tela e desempenho','realme 10.jpeg ','realme 10 2.webp','realme 10 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="motorola 50 3.webp" alt="Motorola Go5"><h3>Motorola Go5</h3><p>Compacto, econômico e ótimo para tarefas básicas.</p><div class="preco">R$ 699,00</div><a class="btn" onclick="verProduto('Motorola Go5','R$ 699,00','Compacto, econômico e ótimo para tarefas básicas','motorola go5.jpeg','motorola go5 2.webp','motorola 50 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="realme c55.jpeg" alt="Realme C55"><h3>Realme C55</h3><p>Modelo econômico, ideal para uso básico.</p><div class="preco">R$ 699,00</div><a class="btn" onclick="verProduto('Realme C55','R$ 699,00','Modelo econômico, ideal para uso básico','realme c55.jpeg','realme c55 2.webp','realme c55 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="realme 11.jpeg" alt="Realme 11"><h3>Realme 11</h3><p>Bateria duradoura, câmera competente e ótimo custo-benefício.</p><div class="preco">R$ 949,00</div><a class="btn" onclick="verProduto('Realme 11','R$ 949,00','Bateria duradoura, câmera competente e ótimo custo-benefício','realme 11.jpeg','realme 11 2.webp','realme 11 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="realme pro 14 3.webp" alt="Realme Pro"><h3>Realme Pro</h3><p>Alta performance, bom para jogos e multitarefas.</p><div class="preco">R$ 1.299,00</div><a class="btn" onclick="verProduto('Realme Pro','R$ 1.299,00','Alta performance, bom para jogos e multitarefas','realme pro 14 1.webp','realme pro 14 2.webp','realme pro 14 3.webp')" href="produtos.html">Comprar</a></div>
+
+ <div class="produto"><img src="realme gt 1.webp" alt="Realme GT 3"><h3>Realme GT 3</h3><p>Smartphone potente, ótimo para jogos e multitarefas, design moderno.</p><div class="preco">R$ 2.499,00</div><a class="btn" onclick="verProduto('Realme GT 3','R$ 2.499,00','Smartphone potente, ótimo para jogos e multitarefas, design moderno','realme gt 1.webp','REALME GT 4.webp','REALME GT 5.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="sansung a 14 1.webp" alt="Samsung 14"><h3>Samsung 14</h3><p>Smartphone moderno com tela AMOLED e bom desempenho.</p><div class="preco">R$ 1.199,00</div><a class="btn" onclick="verProduto('Samsung 14','R$ 1.199,00','Smartphone moderno com tela AMOLED e bom desempenho','sansung a 14 1.webp','sansung a 14 2.webp','sansung a 14 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="motorola g22.jpeg"alt="Motorola G22"><h3>Motorola G22</h3><p>Ótimo custo-benefício com boa tela e bateria.</p><div class="preco">R$ 899,00</div><a class="btn" onclick="verProduto('Motorola G22','R$ 899,00','Ótimo custo-benefício com boa tela e bateria','motorola g22.jpeg','motorola g22 2.webp','motorola g22 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="motorola g31 1.webp" alt="Motorola G31"><h3>Motorola G31</h3><p>Smartphone equilibrado, ideal para uso diário e redes sociais.</p><div class="preco">R$ 949,00</div><a class="btn" onclick="verProduto('Motorola G31','R$ 949,00','Smartphone equilibrado, ideal para uso diário e redes sociais','motorola g31.jpeg','motorola g31 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="motorola g71 2.webp" alt="Motorola G71"><h3>Motorola G71</h3><p>Modelo avançado, desempenho rápido e tela AMOLED.</p><div class="preco">R$ 1.199,00</div><a class="btn" onclick="verProduto('Motorola G71','R$ 1.199,00','Modelo avançado, desempenho rápido e tela AMOLED','motorola g71.jpeg','motorola g71 2.webp','motorola g71 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="motorola  g41.jpeg" alt="Motorola Edge 41"><h3>Motorola Edge 41</h3><p>Modelo avançado com tela ampla e boa performance.</p><div class="preco">R$ 1.499,00</div><a class="btn" onclick="verProduto('Motorola Edge 41','R$ 1.499,00','Modelo avançado com tela ampla e boa performance','motorola  g41.jpeg',' motorola g41 2.webp','motorola g41 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="motorola edge 8 gb.webp" alt="Motorola Edge 8GB"><h3>Motorola Edge 8GB</h3><p>Mais memória RAM para melhor desempenho em multitarefas.</p><div class="preco">R$ 1.699,00</div><a class="btn" onclick="verProduto('Motorola Edge 8GB','R$ 1.699,00','Mais memória RAM para melhor desempenho em multitarefas','motorola edge 8 gb.webp','motorola edge 8gb 2.webp','motorola edge 8gb 3.jpeg')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="motorola edge 50 4.webp" alt="Motorola Edge 50"><h3>Motorola Edge 50</h3><p>Alta performance, câmera excelente e tela AMOLED.</p><div class="preco">R$ 1.899,00</div><a class="btn" onclick="verProduto('Motorola Edge 50','R$ 1.899,00','Alta performance, câmera excelente e tela AMOLED','motorola edge 50 4.webp ','motorola 50 2.webp','motorola 50 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="sansung a 54 3.webp" alt="Samsung Galaxy A54"><h3>Samsung Galaxy A54</h3><p>Modelo intermediário, ótimo para multitarefas e câmera.</p><div class="preco">R$ 1.399,00</div><a class="btn" onclick="verProduto('Samsung Galaxy A54','R$ 1.399,00','Modelo intermediário, ótimo para multitarefas e câmera','sansung galaxy a54 5g.jpeg','sansung a 54 2.webp','sansung a 54 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="sansung ao5 3.webp" alt="Samsung A05"><h3>Samsung A05</h3><p>Modelo econômico, ideal para tarefas básicas e redes sociais.</p><div class="preco">R$ 699,00</div><a class="btn" onclick="verProduto('Samsung A05','R$ 699,00','Modelo econômico, ideal para tarefas básicas e redes sociais','sansung ao5.jpeg ','sansung ao5 2.webp','sansung ao5 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="sansung galaxy ao6.jpeg" alt="Samsung Galaxy A06"><h3>Samsung Galaxy A06</h3><p>Smartphone econômico, perfeito para uso diário.</p><div class="preco">R$ 699,00</div><a class="btn" onclick="verProduto('Samsung Galaxy A06','R$ 699,00','Smartphone econômico, perfeito para uso diário','sansung galaxy ao6.jpeg')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="sansung ao 4 3.webp" alt="Samsung Galaxy A04s"><h3>Samsung Galaxy A04s</h3><p>Modelo de entrada, bom para apps básicos e redes sociais.</p><div class="preco">R$ 649,00</div><a class="btn" onclick="verProduto('Samsung Galaxy A04s','R$ 649,00','Modelo de entrada, bom para apps básicos e redes sociais','sansung galaxy oa4s.jpeg ','sansung ao4 2.webp ','sansung ao 4 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="sansung galaxy s22.jpeg" alt="Samsung Galaxy S22"><h3>Samsung Galaxy S22</h3><p>Smartphone premium, desempenho e câmeras de alta qualidade.</p><div class="preco">R$ 4.799,00</div><a class="btn" onclick="verproduto('Samsung Galaxy S22','R$ 4.799,00','Smartphone premium, desempenho e câmeras de alta qualidade','sansung galaxy s22.jpeg')" href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="samsung galaxy s23.jpeg" alt="Samsung Galaxy S23"><h3>Samsung Galaxy S23</h3><p>Smartphone premium, ótimo desempenho, câmeras avançadas e design moderno.</p><div class="preco">R$ 5.499,00</div><a class="btn" onclick="verProduto('Samsung Galaxy S23','R$ 5.499,00','Smartphone premium, ótimo desempenho, câmeras avançadas e design moderno','samsung galaxy s23.jpeg','samsung galaxy s23 2.webp','samsung galaxy s23 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="SANSUNG M13 1.webp" alt="Samsung M13"><h3>Samsung M13</h3><p>Modelo intermediário, bateria duradoura e boa tela.</p><div class="preco">R$ 899,00</div><a class="btn" onclick="verProduto('Samsung M13','R$ 899,00','Modelo intermediário, bateria duradoura e boa tela','SANSUNG M13 1.webp','sansung m13 2.webp','SANSUNG M13 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="xiaomi 14t.jpeg" alt="Xiaomi 14T"><h3>Xiaomi 14T</h3><p>Desempenho premium, tela grande e câmeras avançadas.</p><div class="preco">R$ 3.999,00</div><a class="btn" onclick="verProduto('Xiaomi 14T','R$ 3.999,00','Desempenho premium, tela grande e câmeras avançadas','xiaomi 14t.jpeg','XIAOMI 14 T 2.webp','XIAOMI 14T 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="xiaomi poco x7.jpeg" alt="Xiaomi Poco X7"><h3>Xiaomi Poco X7</h3><p>Modelo avançado, bom para jogos e uso intenso.</p><div class="preco">R$ 1.399,00</div><a class="btn" onclick="verProduto('Xiaomi Poco X7','R$ 1.399,00','Modelo avançado, bom para jogos e uso intenso','xiaomi poco x7.jpeg','XIAOMI POCO X7 2.webp','XIAOMI POCO X7 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="xiaomi redmi  note 10 1.jpeg" alt="Xiaomi Redmi Note 10"><h3>Xiaomi Redmi Note 10</h3><p>Intermediário confiável, ótimo custo-benefício.</p><div class="preco">R$ 899,00</div><a class="btn" onclick="verProduto('Xiaomi Redmi Note 10','R$ 899,00','Intermediário confiável, ótimo custo-benefício','xiaomi redmi  note 10 1.jpeg','XIAOMI REDMI NOTE 10 2.webp','REDMI NOTE 10 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="xiaomi 11 3.webp" alt="Xiaomi Redmi Note 11"><h3>Xiaomi Redmi Note 11</h3><p>Modelo popular, boa tela e bateria duradoura.</p><div class="preco">R$ 949,00</div><a class="btn" onclick="verProduto('Xiaomi Redmi Note 11','R$ 949,00','Modelo popular, boa tela e bateria duradoura','xiaomi 11 1.webp','xiaomi 11 2.webp','xiaomi 11 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="XIAOMI 12 2.webp" alt="Xiaomi Redmi Note 12"><h3>Xiaomi Redmi Note 12</h3><p>Desempenho intermediário, excelente para uso diário.</p><div class="preco">R$ 1.099,00</div><a class="btn" onclick="verProduto('Xiaomi Redmi Note 12','R$ 1.099,00','Desempenho intermediário, excelente para uso diário','xiaomi redmi note 12.jpeg','XIAOMI 12 2.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="XIAOMI REDMI 12 PRO 2.avif" alt="Xiaomi Redmi Note 12 Pro"><h3>Xiaomi Redmi Note 12 Pro</h3><p>Intermediário avançado, ótimo para fotos e multitarefas.</p><div class="preco">R$ 1.399,00</div><a class="btn" onclick="verProduto('Xiaomi Redmi Note 12 Pro','R$ 1.399,00','Intermediário avançado, ótimo para fotos e multitarefas','XIAOMI 12 1.webp','XIAOMI REDMI 12 PRO 2.avif','XIAOMI REDMI 12 PRO 3.webp')" href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="iphone xr.jpeg" alt="iPhone XR"><h3>iPhone XR</h3><p>Apple, bom desempenho e câmera sólida.</p><div class="preco">R$ 2.799,00</div><a class="btn" onclick="verProduto('iPhone XR','R$ 2.799,00','Apple, bom desempenho e câmera sólida','iphone xr.jpeg','IPHONE XR 2.webp','IPHONE XR 3.webp')" href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="IPHONE SE 1.webp" alt="iPhone SE 2022"><h3>iPhone SE 2022</h3><p>Compacto, desempenho rápido e preço acessível.</p><div class="preco">R$ 2.599,00</div><a class="btn" onclick="verProduto('iPhone SE 2022','R$ 2.599,00','Compacto, desempenho rápido e preço acessível','IPHONE SE 1.webp','IPHONE SE 2.webp','IPHONE SE 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="IPHONE 11.webp" alt="iPhone 11"><h3>iPhone 11</h3><p>Modelo da Apple, excelente desempenho e câmera confiável.</p><div class="preco">R$ 2.499,00</div><a class="btn" onclick="verProduto('iPhone 11','R$ 2.499,00','Modelo da Apple, excelente desempenho e câmera confiável','IPHONE 11.webp','IPHONE 11 2.webp','iphone 11 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="iphone 12.jpeg" alt="iPhone 12"><h3>iPhone 12</h3><p>Desempenho premium e câmeras avançadas.</p><div class="preco">R$ 3.199,00</div><a class="btn" onclick="verProduto('iPhone 12','R$ 3.199,00','Desempenho premium e câmeras avançadas','iphone 12.jpeg','iphone 12 2.webp','iphone 12 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="iphone 13 1.avif" alt="iPhone 13"><h3>iPhone 13</h3><p>Alta performance, câmera avançada e design moderno.</p><div class="preco">R$ 3.999,00</div><a class="btn" onclick="verProduto('iPhone 13','R$ 3.999,00','Alta performance, câmera avançada e design moderno','iphone 13 1.avif','iphone 13 2.webp','iphone 13 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="iphone 14 img certaa.webp" alt="iPhone 14"><h3>iPhone 14</h3><p>Smartphone top de linha da Apple, excelente para fotos e vídeos.</p><div class="preco">R$ 4.599,00</div><a class="btn" onclick="verProduto('iPhone 14','R$ 4.599,00','Smartphone top de linha da Apple, excelente para fotos e vídeos','iphone 14 img certaa.webp','iphone 14 2.webp','iphone 14 4.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="IPHONE 15" alt="iPhone 15"><h3>iPhone 15</h3><p>Última geração, desempenho máximo e câmeras de ponta.</p><div class="preco">R$ 5.999,00</div><a class="btn" onclick="verProduto('iPhone 15','R$ 5.999,00','Última geração, desempenho máximo e câmeras de ponta','IPHONE 15','iphone 15 2.webp','iphone 15 3.webp')" href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="iphone 16.webp" alt="iPhone 16"><h3>iPhone 16</h3><p>Última geração da Apple, desempenho máximo e câmeras de ponta.</p><div class="preco">R$ 8.499,00</div><a class="btn" onclick="verProduto('iPhone 16','R$ 8.499,00','Última geração da Apple, desempenho máximo e câmeras de ponta','iphone 16.webp','iphone 16 2.webp','iphone 16 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <div class="produto"><img src="iphone 17 pro max.jpeg" alt="iPhone 17"><h3>iPhone 17</h3><p>Modelo futurista, alta tecnologia e desempenho extremo.</p><div class="preco">R$ 7.999,00</div><a class="btn" onclick="verProduto('iPhone 17','R$ 7.999,00','Modelo futurista, alta tecnologia e desempenho extremo','iphone 17 pro max.jpeg ','iphone 17 2.webp','iphone 17 3.webp')" href="produtos.html">Comprar</a></div>
+
+  <script>
+function verProduto(nome, preco, descricao, ...imagens) {
+    const produtoSelecionado = { nome, preco, descricao, imagens };
+    localStorage.setItem('produtoSelecionado', JSON.stringify(produtoSelecionado));
+    window.location.href = 'produtos.html';
+}
+</script>
+
+
+
+<!-- CARRINHO SIMPLES -->
+<div id="carrinho">
+  <h3>Carrinho</h3>
+  <p>Vazio</p>
+  <a href="produtos.html" class="checkout-btn">Ir para o Carrinho 🛒</a>
+</div>
+
+<style>
+.checkout-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #007bff; /* azul */
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.checkout-btn:hover { 
+  background: #0056b3; 
+}
+</style>
+
+<script>
+// Carrinho básico sem alerta/modal
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function salvarCarrinho(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function adicionarAoCarrinho(nome, preco){
+  carrinho.push({nome, preco});
+  salvarCarrinho();
+}
+</script>

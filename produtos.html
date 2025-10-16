@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produto - World Tech</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; display:block; margin:0 auto 10px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+
+.container { max-width:900px; margin:40px auto; background:#fff; border-radius:10px; padding:30px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; }
+
+.carousel { position:relative; max-width:700px; margin:auto; overflow:hidden; border-radius:10px; }
+.carousel img { width:100%; height:500px; object-fit:contain; transition:opacity 0.3s ease; display:block; }
+.arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:40px; background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:50%; width:50px; height:50px; cursor:pointer; opacity:0; display:flex; align-items:center; justify-content:center; transition:opacity 0.3s; }
+.arrow:hover { background:rgba(0,0,0,0.6); }
+.carousel:hover .arrow { opacity:1; }
+.prev { left:10px; }
+.next { right:10px; }
+
+.produto-info { margin-top:30px; }
+.produto-info h2 { margin-bottom:10px; font-size:26px; }
+.preco { color:#1e90ff; font-size:24px; font-weight:bold; margin:10px 0; }
+.descricao { color:#555; margin-bottom:20px; font-size:16px; }
+
+.botoes { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
+.btn { background:#1e90ff; color:#fff; border:none; padding:12px 25px; border-radius:5px; font-weight:bold; cursor:pointer; transition:0.3s; font-size:16px; }
+.btn:hover { background:#0a65c0; }
+
+@media (max-width:700px){
+  .carousel img { height:350px; }
+  .arrow { font-size:30px; width:40px; height:40px; }
+}
+
+/* Notificação moderna */
+.notificacao {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1e90ff;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-weight: bold;
+  z-index: 1000;
+  opacity: 0;
+  animation: aparecer 0.3s forwards;
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="img/logo.png" alt="World Tech Logo">
+  <nav>
+    <a href="world-itens%20tecnologicos.html">Telefones</a>
+    <a href="fones-de-ouvido-html.html">Fones de Ouvido</a>
+    <a href="impressora-html.html">Impressoras</a>
+    <a href="computadores-html.html">Computadores</a>
+    <a href="escritorio-html.html">Escritório</a>
+    <a href="acessorios-html.html">Acessórios</a>
+    <a href="games-console.html">Games & Console</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="carousel">
+    <button class="arrow prev" onclick="mudarImagem(-1)">&#10094;</button>
+    <img id="imagem-principal" src="" alt="Produto">
+    <button class="arrow next" onclick="mudarImagem(1)">&#10095;</button>
+  </div>
+
+  <div class="produto-info">
+    <h2 id="nome-produto">Produto</h2>
+    <p class="preco" id="preco-produto">R$ 0,00</p>
+    <p class="descricao" id="descricao-produto">Descrição do produto</p>
+    <div class="botoes">
+      <button class="btn" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
+      <button class="btn" onclick="comprarAgora()">Comprar Agora</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let produto = JSON.parse(localStorage.getItem("produtoSelecionado")) || null;
+let imagens = produto ? produto.imagens : [];
+let indiceImagem = 0;
+
+// Preenche dados do produto
+function preencherProduto() {
+  if(!produto) return;
+  document.getElementById("nome-produto").textContent = produto.nome;
+  document.getElementById("preco-produto").textContent = produto.preco;
+  document.getElementById("descricao-produto").textContent = produto.descricao;
+  if(imagens.length > 0){
+    document.getElementById("imagem-principal").src = imagens[0];
+  }
+}
+
+// Carousel
+function mudarImagem(direcao){
+  if(imagens.length <= 1) return;
+  indiceImagem += direcao;
+  if(indiceImagem < 0) indiceImagem = imagens.length - 1;
+  if(indiceImagem >= imagens.length) indiceImagem = 0;
+  const imgEl = document.getElementById("imagem-principal");
+  imgEl.style.opacity = 0;
+  setTimeout(() => {
+    imgEl.src = imagens[indiceImagem];
+    imgEl.style.opacity = 1;
+  }, 200);
+}
+
+// Carrinho
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+function salvarCarrinho() { localStorage.setItem("carrinho", JSON.stringify(carrinho)); }
+function mostrarAviso(texto) {
+  const aviso = document.createElement('div');
+  aviso.className = 'notificacao';
+  aviso.textContent = texto;
+  document.body.appendChild(aviso);
+  setTimeout(() => aviso.remove(), 2000);
+}
+
+// Adicionar ao carrinho e voltar
+function adicionarCarrinho(){
+  if(!produto) return;
+  carrinho.push(produto);
+  salvarCarrinho();
+  mostrarAviso('✅ Produto adicionado ao carrinho!');
+  setTimeout(() => history.back(), 800);
+}
+
+// Comprar agora
+function comprarAgora(){
+  if(!produto) return;
+  carrinho.push(produto);
+  salvarCarrinho();
+  window.location.href = 'checkout.html';
+}
+
+document.addEventListener("DOMContentLoaded", preencherProduto);
+</script>
+
+</body>
+</html>

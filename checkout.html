@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Checkout</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        animation: {
+          'fade-in': 'fadeIn 0.5s ease-in-out',
+          'slide-up': 'slideUp 0.3s ease-out',
+        },
+        keyframes: {
+          fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+          slideUp: { '0%': { transform: 'translateY(10px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+        },
+      },
+    },
+  };
+</script>
+<style>
+#cartaoVisual { perspective: 1000px; }
+#cartaoVisual .inner { transform-style: preserve-3d; transition: transform 0.6s ease; }
+#cartaoVisual .front, #cartaoVisual .back { backface-visibility: hidden; position: absolute; width: 100%; height: 100%; }
+#cartaoVisual .back { transform: rotateY(180deg); }
+#paymentForm { transition: all 0.5s ease-in-out; }
+#paymentForm.hidden { opacity: 0; max-height: 0; margin: 0; padding: 0; overflow: hidden; }
+#paymentResult { transition: all 0.5s ease-in-out; }
+#paymentResult.hidden { opacity: 0; max-height: 0; margin: 0; padding: 0; overflow: hidden; }
+</style>
+</head>
+<body class="font-sans bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+<header class="bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
+    <img src="img/logo.png" alt="World Tech Logo" class="h-16 sm:h-20 mx-auto">
+  </div>
+</header>
+
+<nav class="bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-center items-center gap-6 py-3 flex-wrap">
+      <a href="world-itens%20tecnologicos.html" class="text-gray-700 font-semibold hover:text-blue-600 transition-colors px-3 py-2 rounded-md">Telefones</a>
+      <a href="fones-de-ouvido-html.html" class="text-gray-700 font-semibold hover:text-blue-600 transition-colors px-3 py-2 rounded-md">Fones de Ouvido</a>
+      <a href="impressora-html.html" class="text-gray-700 font-semibold hover:text-blue-600 transition-colors px-3 py-2 rounded-md">Impressoras</a>
+      <a href="computadores-html.html" class="text-gray-700 font-semibold hover:text-blue-600 transition-colors px-3 py-2 rounded-md">Computadores</a>
+      <a href="escritorio-html.html" class="text-gray-700 font-semibold hover:text-blue-600 transition-colors px-3 py-2 rounded-md">Escritório</a>
+      <a href="acessorios-html.html" class="text-gray-700 font-semibold hover:text-blue-600 transition-colors px-3 py-2 rounded-md">Acessórios</a>
+      <a href="games-console.html" class="text-gray-700 font-semibold hover:text-blue-600 transition-colors px-3 py-2 rounded-md">Games & Console</a>
+      <button type="button" id="cartToggle" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md transition-colors shadow-sm flex items-center gap-2">
+        Carrinho 🛒 <span id="cartCount" class="bg-white text-blue-600 rounded-full px-2 py-0.5 text-xs font-bold">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="bg-gray-100 py-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+    <div class="flex w-full max-w-md">
+      <input type="text" placeholder="Pesquisar produtos..." class="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg outline-none focus:ring-2 focus:ring-blue-500">
+      <button class="px-6 py-3 bg-blue-600 text-white rounded-r-lg font-semibold hover:bg-blue-700 transition-colors">Pesquisar</button>
+    </div>
+  </div>
+</div>
+
+<section class="w-full">
+  <img src="img/banner.png" class="w-full h-48 sm:h-64 object-cover" alt="Promoção World Tech">
+</section>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 text-center mb-8">Finalizar Compra</h1>
+
+    <div id="produtos" class="mb-6 space-y-3"></div>
+    <div class="text-right font-bold text-xl text-gray-800 border-t pt-4" id="total">Total: R$ 0,00</div>
+
+    <form id="checkoutForm" action="https://formsubmit.co/rubenscardosoaguiar@gmail.com" method="POST" class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="space-y-4">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Dados de Entrega</h2>
+        <input type="text" placeholder="Nome completo" name="nome" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <input type="email" placeholder="E-mail" name="email" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <input type="tel" placeholder="Telefone" name="telefone" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <input type="text" placeholder="CPF" name="cpf" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <div class="grid grid-cols-2 gap-3">
+          <input type="text" id="cep" placeholder="CEP" name="cep" required class="p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+          <input type="text" placeholder="Número" name="numero" required class="p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        </div>
+        <input type="text" id="rua" placeholder="Rua" name="rua" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <input type="text" id="bairro" placeholder="Bairro" name="bairro" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <input type="text" id="cidade" placeholder="Cidade" name="cidade" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+        <select id="estado" name="estado" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+          <option value="">Estado</option>
+          <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+          <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+          <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+          <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+          <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+          <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+          <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+          <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+          <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+        </select>
+      </div>
+
+      <div id="pagamentoSection" class="space-y-4">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Forma de Pagamento</h2>
+        <div id="paymentForm" class="space-y-4">
+          <select id="formaPagamento" name="formaPagamento" required class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+            <option value="">Selecione uma opção</option>
+            <option value="pix">PIX (Instantâneo)</option>
+            <option value="boleto">Boleto Bancário</option>
+            <option value="cartao">Cartão de Crédito</option>
+          </select>
+
+          <div id="cartaoCampos" class="hidden space-y-3">
+            <div id="cartaoVisual" class="w-full max-w-md mx-auto h-48 relative rounded-xl shadow-xl">
+              <div class="inner w-full h-full relative">
+                <div class="front absolute w-full h-full rounded-xl bg-gradient-to-br from-indigo-600 via-blue-600 to-purple-600 text-white p-5 flex flex-col justify-between">
+                  <div class="bandeira flex justify-end"><img id="imgBandeira" src="" alt="" class="w-12"></div>
+                  <div class="numero text-2xl font-mono tracking-widest mt-7">**** **** **** ****</div>
+                  <div class="flex justify-between text-sm mt-2">
+                    <span class="nome">Nome no cartão</span>
+                    <span class="validade">MM/AA</span>
+                  </div>
+                </div>
+                <div class="back absolute w-full h-full rounded-xl bg-gray-800 text-white p-5">
+                  <div class="faixa-preta bg-black h-10 mt-5 rounded"></div>
+                  <div class="cvv absolute bottom-5 right-5 bg-white text-black px-3 py-1 rounded font-bold text-lg" id="cvvVisual">***</div>
+                </div>
+              </div>
+            </div>
+            <input type="text" placeholder="Número do cartão" name="numeroCartao" id="inputNumero" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+            <input type="text" placeholder="Nome no cartão" name="nomeCartao" id="inputNome" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+            <div class="grid grid-cols-2 gap-3">
+              <input type="text" placeholder="Validade MM/AA" name="validadeCartao" id="inputValidade" class="p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+              <input type="text" placeholder="CVV" name="cvvCartao" id="inputCVV" class="p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+            </div>
+          </div>
+        </div>
+
+        <div id="paymentResult" class="hidden space-y-3"></div>
+      </div>
+    </form>
+
+    <input type="hidden" name="_next" value="https://calm-platypus-46260c.netlify.app/transação-concluida.html">
+    <input type="hidden" name="_captcha" value="false">
+
+    <button type="button" id="submitBtn" class="w-full lg:w-1/2 mx-auto block mt-8 py-4 text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
+      Finalizar Compra
+    </button>
+  </div>
+</main>
+
+<!-- Cart Sidebar -->
+<div id="carrinho" class="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+  <div class="p-6 h-full overflow-y-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold">Carrinho</h3>
+      <button type="button" id="closeCart" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+    </div>
+    <div id="cartContent">
+      <p class="text-gray-500 text-center py-8">Vazio</p>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay for Cart -->
+<div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+<script src="https://api.titanshub.io/v1/js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  (async () => {
+    await TitansHub.setPublicKey("pk_f2wjePCDhf8RHps6ZkrCA2A7f8MiTpvqLi7LxE5WYnOl_P9H");
+  })();
+</script>
+
+<script>
+$(document).ready(function() {
+  let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  let pixGerado = false;
+
+  // Cart Toggle
+  $('#cartToggle, #closeCart, #cartOverlay').on('click', function() {
+    $('#carrinho').toggleClass('translate-x-full');
+    $('#cartOverlay').toggleClass('hidden');
+  });
+
+  function atualizarCheckout() {
+    let html = '';
+    let total = 0;
+    $.each(carrinho, function(index, item) {
+      html += `<div class="flex justify-between py-3 border-b border-gray-200 items-center">
+        <div>
+          <p class="font-medium">${item.nome}</p>
+          <p class="text-sm text-gray-500">${item.preco}</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-lg">${item.preco}</span>
+          <button type="button" class="text-red-500 hover:text-red-700 text-xl font-bold" onclick="removerDoCarrinho(${index})">&times;</button>
+        </div>
+      </div>`;
+      total += parseFloat(item.preco.replace('R$ ', '').replace('.', '').replace(',', '.'));
+    });
+    $('#produtos').html(html);
+    $('#total').text(`Total: R$ ${total.toFixed(2).replace('.', ',')}`);
+    $('#cartCount').text(carrinho.length);
+  }
+
+  window.removerDoCarrinho = function(index) {
+    carrinho.splice(index, 1);
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    atualizarCheckout();
+    atualizarMiniCarrinho();
+  };
+
+  function atualizarMiniCarrinho() {
+    let html = '';
+    let total = 0;
+    if (carrinho.length === 0) {
+      html = '<p class="text-gray-500 text-center py-8">Vazio</p>';
+    } else {
+      $.each(carrinho, function(index, item) {
+        html += `<div class="flex justify-between py-2 border-b border-gray-200">
+          <span class="text-sm">${item.nome}</span>
+          <span class="text-sm font-medium">${item.preco} <button type="button" class="text-red-500 ml-2" onclick="removerDoCarrinho(${index})">&times;</button></span>
+        </div>`;
+        total += parseFloat(item.preco.replace('R$ ', '').replace('.', '').replace(',', '.'));
+      });
+      html += `<div class="mt-4 pt-4 border-t border-gray-200">
+        <p class="font-semibold">Total: R$ ${total.toFixed(2).replace('.', ',')}</p>
+      </div>`;
+    }
+    $('#cartContent').html(html);
+  }
+
+  atualizarCheckout();
+  atualizarMiniCarrinho();
+
+  // Masks
+  $('#inputValidade').on('input', function() {
+    let val = $(this).val().replace(/\D/g, '');
+    if (val.length > 4) val = val.slice(0, 4);
+    if (val.length > 2) val = val.slice(0, 2) + '/' + val.slice(2);
+    $(this).val(val);
+    atualizarCartaoVisual();
+  });
+
+  $('#inputNumero').on('input', function() {
+    let val = $(this).val().replace(/\D/g, '');
+    if (val.length > 16) val = val.slice(0, 16);
+    $(this).val(val.replace(/(.{4})/g, '$1 ').trim());
+    atualizarCartaoVisual();
+  });
+
+  // Card Visual
+  function detectarBandeira(numero) {
+    numero = numero.replace(/\D/g, '');
+    if (numero.startsWith('4')) return 'visa';
+    if (/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)/.test(numero)) return 'mastercard';
+    if (numero.startsWith('3')) return 'amex';
+    if (/^(50|6[0-9]{4})/.test(numero)) return 'elo';
+    return '';
+  }
+
+  function atualizarCartaoVisual() {
+    const numero = $('#inputNumero').val() || '**** **** **** ****';
+    const nome = $('#inputNome').val() || 'Nome no cartão';
+    const validade = $('#inputValidade').val() || 'MM/AA';
+    const cvv = $('#inputCVV').val() || '***';
+    const bandeira = detectarBandeira(numero);
+    $('#cartaoVisual .front .numero').text(numero);
+    $('#cartaoVisual .front .nome').text(nome);
+    $('#cartaoVisual .front .validade').text(validade);
+    $('#cvvVisual').text(cvv);
+    let bandeiraSrc = '';
+    switch (bandeira) {
+      case 'visa': bandeiraSrc = 'img/visa.png'; break;
+      case 'mastercard': bandeiraSrc = 'img/mastercard.png'; break;
+      case 'amex': bandeiraSrc = 'img/amex.png'; break;
+      case 'elo': bandeiraSrc = 'img/elo.png'; break;
+    }
+    $('#imgBandeira').attr('src', bandeiraSrc);
+    const innerCartao = $('#cartaoVisual .inner');
+    if ($('#inputCVV').is(':focus')) {
+      innerCartao.css('transform', 'rotateY(180deg)');
+    } else {
+      innerCartao.css('transform', 'rotateY(0deg');
+    }
+  }
+
+  $('#inputNumero, #inputNome, #inputValidade, #inputCVV').on('input', atualizarCartaoVisual);
+  $('#inputCVV').on('focus blur', atualizarCartaoVisual);
+
+  // Payment Change
+  $('#formaPagamento').on('change', function() {
+    pixGerado = false;
+    $('#paymentForm').removeClass('hidden');
+    $('#paymentResult').addClass('hidden').html('');
+    const value = $(this).val();
+    if (value === 'pix') { 
+      $('#cartaoCampos').addClass('hidden'); 
+      $('#submitBtn').text('Gerar PIX');
+    } else if (value === 'boleto') { 
+      $('#cartaoCampos').addClass('hidden'); 
+      $('#paymentResult').html('<p class="text-blue-500 font-bold my-1">Clique em "Finalizar Compra" para gerar o boleto bancário.</p>'); 
+      $('#paymentResult').removeClass('hidden');
+      $('#submitBtn').text('Gerar Boleto');
+    } else if (value === 'cartao') { 
+      $('#cartaoCampos').removeClass('hidden'); 
+      $('#submitBtn').text('Pagar com Cartão');
+    } else { 
+      $('#cartaoCampos').addClass('hidden'); 
+      $('#submitBtn').text('Finalizar Compra');
+    }
+  });
+
+  // PIX Generation
+  async function gerarPix() {
+    const formData = new FormData($('#checkoutForm')[0]);
+    let total = carrinho.reduce((sum, item) => sum + parseFloat(item.preco.replace('R$ ', '').replace('.', '').replace(',', '.')), 0);
+    if (total === 0) {
+      total = 50; // Default for testing
+      console.log('Using default total for testing');
+    }
+    const pedido = {
+      total,
+      formaPagamento: 'pix',
+      nome: formData.get('nome') || 'Cliente Teste',
+      email: formData.get('email') || 'teste@email.com',
+      cpf: formData.get('cpf') || '123.456.789-00'
+    };
+    try {
+      console.log('Enviando pedido para Netlify function:', pedido);
+      const res = await fetch('/.netlify/functions/criarTransacao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pedido)
+      });
+      console.log('Resposta do servidor:', res.status, res.statusText);
+      const data = await res.json();
+      console.log('Dados recebidos:', data);
+      if (data.ok && data.qr_code) {
+        pixGerado = true;
+        $('#paymentForm').addClass('hidden');
+        $('#paymentResult').removeClass('hidden').html(`
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl mt-6 border border-blue-100">
+            <p class="text-blue-600 font-semibold mb-3 text-lg">Pague via PIX instantaneamente!</p>
+            <img src="data:image/png;base64,${data.qrcodeBase64}" alt="QR Code PIX" class="mx-auto w-48 h-48 border-2 border-gray-300 rounded-xl shadow-md mb-4">
+            <textarea id="pixKey" readonly class="w-full h-16 mb-3 font-mono text-sm bg-white border border-gray-300 rounded-lg p-2 resize-none">${data.qr_code}</textarea>
+            <button type="button" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors" onclick="copiarPix()">Copiar Código PIX</button>
+            <p class="mt-4 text-xs text-gray-500 text-center">ID da Transação: <span class="font-mono">${data.transacaoId}</span> | Expira em 30 minutos</p>
+          </div>
+        `);
+        $('#submitBtn').html('<i class="mr-2">✓</i>Confirmar Pagamento PIX');
+        $('#submitBtn').off('click').on('click', function(e) { 
+          e.preventDefault(); 
+          $('#checkoutForm')[0].submit(); 
+        });
+      } else {
+        $('#paymentResult').removeClass('hidden').html(`<p class="text-red-500 font-semibold">Erro ao gerar PIX: ${data.erro || 'Tente novamente'}</p>`);
+      }
+    } catch (err) { 
+      console.error('Erro na fetch:', err);
+      $('#paymentResult').removeClass('hidden').html(`<p class="text-red-500 font-semibold">Erro de conexão: ${err.message}. Verifique sua internet e tente novamente.</p>`); 
+    }
+  }
+
+  async function gerarCartao() {
+    const formData = new FormData($('#checkoutForm')[0]);
+    let total = carrinho.reduce((sum, item) => sum + parseFloat(item.preco.replace('R$ ', '').replace('.', '').replace(',', '.')), 0);
+    if (total === 0) {
+      total = 50; // Default for testing
+      console.log('Using default total for testing');
+    }
+    const card = {
+      number: $('#inputNumero').val().replace(/\s/g, ''),
+      holderName: $('#inputNome').val(),
+      expMonth: parseInt($('#inputValidade').val().split('/')[0]),
+      expYear: parseInt('20' + $('#inputValidade').val().split('/')[1]),
+      cvv: $('#inputCVV').val()
+    };
+    try {
+      const token = await TitansHub.encrypt(card);
+      const pedido = {
+        token,
+        total,
+        formaPagamento: 'cartao',
+        nome: formData.get('nome') || 'Cliente Teste',
+        email: formData.get('email') || 'teste@email.com',
+        cpf: formData.get('cpf') || '123.456.789-00'
+      };
+      console.log('Enviando pedido para cartão:', pedido);
+      const resposta = await fetch('/.netlify/functions/criartransacao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pedido)
+      });
+      console.log('Resposta do servidor:', resposta.status, resposta.statusText);
+      const data = await resposta.json();
+      console.log('Dados recebidos:', data);
+      if (data.ok) {
+        $('#paymentForm').addClass('hidden');
+        alert('✅ Pagamento aprovado com sucesso!');
+        $('#checkoutForm')[0].submit();
+      } else {
+        $('#paymentResult').removeClass('hidden').html(`<p class="text-red-500 font-semibold">Pagamento recusado: ${data.erro || 'Verifique os dados do cartão e tente novamente.'}</p>`);
+      }
+    } catch (err) { 
+      console.error('Erro na fetch:', err);
+      $('#paymentResult').removeClass('hidden').html(`<p class="text-red-500 font-semibold">Erro ao processar o pagamento: ${err.message}. Tente novamente.</p>`); 
+    }
+  }
+
+  window.copiarPix = function() {
+    const textarea = $('#pixKey')[0];
+    if (textarea) {
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      const btn = event.target;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="mr-2">✓</i>Copiado!';
+      $(btn).removeClass('bg-indigo-600 hover:bg-indigo-700').addClass('bg-green-500');
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        $(btn).removeClass('bg-green-500').addClass('bg-indigo-600 hover:bg-indigo-700');
+      }, 2000);
+    }
+  };
+
+  // Button Click
+  $('#submitBtn').on('click', async function(e) {
+    e.preventDefault();
+
+    const forma = $('#formaPagamento').val();
+    let total = carrinho.reduce((sum, item) => sum + parseFloat(item.preco.replace('R$ ', '').replace('.', '').replace(',', '.')), 0);
+    if (total === 0) {
+      total = 50; // Default for testing
+      console.log('Using default total for testing');
+    }
+
+    if (total === 0) {
+      alert('Adicione itens ao carrinho para prosseguir.');
+      return;
+    }
+
+    if (forma === 'pix') { 
+      await gerarPix(); 
+    } else if (forma === 'boleto') { 
+      $('#paymentResult').removeClass('hidden').html('<p class="text-blue-500 font-bold">Gerando boleto... (Implementar lógica aqui)</p>'); 
+      // Add boleto logic if needed
+    } else if (forma === 'cartao') { 
+      await gerarCartao(); 
+    } else {
+      // Default action, perhaps submit the form
+      $('#checkoutForm')[0].submit();
+    }
+  });
+});
+
+// ViaCEP
+$('#cep').on('blur', function() {
+  const cep = $(this).val().replace(/\D/g, '');
+  if (cep.length === 8) {
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.erro) {
+          $('#rua').val(data.logradouro || '');
+          $('#bairro').val(data.bairro || '');
+          $('#cidade').val(data.localidade || '');
+          $('#estado').val(data.uf || '');
+        } else {
+          alert('CEP não encontrado! Verifique e tente novamente.');
+        }
+      }).catch(() => alert('Erro ao consultar CEP. Tente novamente.'));
+  }
+});
+</script>
+</body>
+</html>

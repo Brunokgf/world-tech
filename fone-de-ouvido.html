@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Fones de Ouvido</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+nav .carrinho-btn { cursor:pointer; background:#1e90ff; padding:5px 10px; border-radius:5px; }
+nav .carrinho-btn:hover { background:#0a65c0; }
+.search-bar { display:flex; justify-content:center; padding:15px; background:#f1f1f1; }
+.search-bar input { width:50%; padding:10px; border:1px solid #ccc; border-radius:5px 0 0 5px; outline:none; }
+.search-bar button { padding:10px 20px; border:none; background:#1e90ff; color:#fff; border-radius:0 5px 5px 0; cursor:pointer; font-weight:bold; }
+.search-bar button:hover { background:#0a65c0; }
+.banner { width:100%; display:block; margin-bottom:20px; }
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { text-align:center; margin-bottom:20px; }
+.produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+.produto { background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:15px; text-align:center; transition:0.3s; }
+.produto:hover { transform:translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.produto img { max-width:100%; height:150px; object-fit:contain; margin-bottom:10px; }
+.produto h3 { font-size:16px; margin-bottom:8px; }
+.produto p { font-size:14px; margin-bottom:8px; }
+.preco { font-size:16px; font-weight:bold; color:#1e90ff; margin-bottom:12px; }
+.btn { display:inline-block; background:#1e90ff; color:white; padding:10px 15px; border-radius:5px; text-decoration:none; cursor:pointer; }
+.btn:hover { background:#0a65c0; }
+#carrinho { position:fixed; top:70px; right:20px; width:280px; max-height:400px; overflow-y:auto; background:white; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.3); padding:10px; display:none; z-index:1000; }
+#carrinho h3 { margin-top:0; text-align:center; }
+#carrinho p { margin:5px 0; }
+#carrinho .total { font-weight:bold; color:#1e90ff; text-align:right; margin-top:10px; }
+#carrinho .checkout-btn { display:block; margin-top:10px; padding:8px 12px; background:#007bff; color:#fff; text-align:center; border-radius:5px; text-decoration:none; }
+#carrinho .checkout-btn:hover { background:#007bff; }
+</style>
+</head>
+<body>
+<header>
+<img src="37ef314a-4d5b-46f2-8e9f-050c2ff3ee03.png" alt="World Tech Logo">
+</header>
+
+<nav>
+<a href="world-itens%20tecnologicos.html">Telefones</a>
+<a href="fones-de-ouvido-html.html">Fones de Ouvido</a>
+<a href="impressora-html.html">Impressoras</a>
+<a href="computadores-html.html">Computadores</a>
+<a href="escritorio-html.html">Escritório</a>
+<a href="acessorios-html.html">Acessórios</a>
+<a href="games-console.html">games&console</a>
+<a href="carrinho.html" class="carrinho-btn">Carrinho 🛒</a>
+
+</nav>
+<!-- Barra de busca funcional -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+  <button id="searchBtn">Pesquisar</button>
+</div>
+<style>
+/* Estilo da barra de busca */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f1f1f1;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1 1 300px;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  min-width: 150px;
+}
+
+.search-bar button {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border: none;
+  background: #1e90ff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-bar button:hover {
+  background: #0a65c0;
+}
+</style>
+
+<script>
+// Função para filtrar produtos
+function filtrarProdutos() {
+  const searchValue = document.getElementById('searchInput').value.toLowerCase();
+  const produtos = document.querySelectorAll('.produto');
+
+  produtos.forEach(produto => {
+    const nome = produto.querySelector('h3').innerText.toLowerCase();
+    if(nome.includes(searchValue) || searchValue === "") {
+      produto.style.display = 'block';
+    } else {
+      produto.style.display = 'none';
+    }
+  });
+}
+
+// Executa ao clicar no botão
+document.getElementById('searchBtn').addEventListener('click', filtrarProdutos);
+
+// Executa ao pressionar Enter no campo de busca
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if(e.key === 'Enter') {
+    e.preventDefault();
+    filtrarProdutos();
+  }
+});
+</script>
+
+<section>
+<img src="img certa 2.0.png" class="banner" alt="Promoção World Tech">
+</section>
+
+<div class="container">
+<h2>Fones de Ouvido</h2>
+<div class="produtos">
+  <div class="produto"><img src="JBL Tune 110.jpeg" alt="JBL Tune 110"><h3>JBL Tune 110</h3><p>Fone intra-auricular com som potente</p><div class="preco">R$ 49,90</div><a class="btn" onclick="verProduto('JBL Tune 110','R$ 49,90','Fone intra-auricular com som potente','JBL Tune 110.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="xiaomi redmi airdots.webp" alt="Xiaomi Redmi Airdots"><h3>Xiaomi Redmi Airdots</h3><p>Leve, confortável e com som estéreo</p><div class="preco">R$ 79,90</div><a class="btn" onclick="verProduto('Xiaomi Redmi Airdots','R$ 79,90','Leve, confortável e com som estéreo','xiaomi redmi airdots.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="sony mdr-zx.jpeg" alt="Sony MDR-ZX110"><h3>Sony MDR-ZX110</h3><p>Headphone simples e funcional</p><div class="preco">R$ 89,90</div><a class="btn" onclick="verProduto('Sony MDR-ZX110','R$ 89,90','Headphone simples e funcional','sony mdr-zx.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Apple EarPods (Lightning).jpeg" alt="Apple EarPods (Lightning)"><h3>Apple EarPods (Lightning)</h3><p>Design ergonômico e som claro</p><div class="preco">R$ 99,00</div><a class="btn" onclick="verProduto('Apple EarPods (Lightning)','R$ 99,00','Design ergonômico e som claro','Apple EarPods (Lightning).jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="JBL Tune 500.jpeg" alt="JBL Tune 500"><h3>JBL Tune 500</h3><p>Over-ear com som Pure Bass</p><div class="preco">R$ 129,90</div><a class="btn" onclick="verProduto('JBL Tune 500','R$ 129,90','Over-ear com som Pure Bass','JBL Tune 500.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Xiaomi Redmi Airdots 2.webp" alt="Xiaomi Redmi Airdots 2"><h3>Xiaomi Redmi Airdots 2</h3><p>Bluetooth com bateria longa</p><div class="preco">R$ 139,90</div><a class="btn" onclick="verProduto('Xiaomi Redmi Airdots 2','R$ 139,90','Bluetooth com bateria longa','Xiaomi Redmi Airdots 2.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Sony WH-CH510.jpg" alt="Sony WH-CH510"><h3>Sony WH-CH510</h3><p>Leve, Bluetooth e microfone</p><div class="preco">R$ 149,90</div><a class="btn" onclick="verProduto('Sony WH-CH510','R$ 149,90','Leve, Bluetooth e microfone','Sony WH-CH510.jpg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Xiaomi Redmi Buds 4 Active.jpg" alt="Xiaomi Redmi Buds 4 Active"><h3>Xiaomi Redmi Buds 4 Active</h3><p>Cancelamento de ruído ativo</p><div class="preco">R$ 199,90</div><a class="btn" onclick="verProduto('Xiaomi Redmi Buds 4 Active','R$ 199,90','Cancelamento de ruído ativo','Xiaomi Redmi Buds 4 Active.jpg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="JBL Tune 510BT.jpg" alt="JBL Tune 510BT"><h3>JBL Tune 510BT</h3><p>Over-ear, Pure Bass e bateria 40h</p><div class="preco">R$ 229,90</div><a class="btn" onclick="verProduto('JBL Tune 510BT','R$ 229,90','Over-ear, Pure Bass e bateria 40h','JBL Tune 510BT.jpg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Sony WH-CH710N.jpg" alt="Sony WH-CH710N"><h3>Sony WH-CH710N</h3><p>Cancelamento de ruído digital</p><div class="preco">R$ 299,90</div><a class="btn" onclick="verProduto('Sony WH-CH710N','R$ 299,90','Cancelamento de ruído digital','Sony WH-CH710N.jpg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Apple AirPods 2.jpeg" alt="Apple AirPods 2"><h3>Apple AirPods 2</h3><p>Conexão automática e som de alta qualidade</p><div class="preco">R$ 299,00</div><a class="btn" onclick="verProduto('Apple AirPods 2','R$ 299,00','Conexão automática e som de alta qualidade','Apple AirPods 2.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="JBL Live 400BT.webp" alt="JBL Live 400BT"><h3>JBL Live 400BT</h3><p>Som JBL e controle por voz</p><div class="preco">R$ 299,90</div><a class="btn" onclick="verProduto('JBL Live 400BT','R$ 299,90','Som JBL e controle por voz','JBL Live 400BT.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="HyperX Cloud Stinger Core.webp" alt="HyperX Cloud Stinger Core"><h3>HyperX Cloud Stinger Core</h3><p>Headset gamer leve e confortável</p><div class="preco">R$ 299,90</div><a class="btn" onclick="verProduto('HyperX Cloud Stinger Core','R$ 299,90','Headset gamer leve e confortável','HyperX Cloud Stinger Core.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Xiaomi Redmi Buds 4 Pro.jpeg" alt="Xiaomi Redmi Buds 4 Pro"><h3>Xiaomi Redmi Buds 4 Pro</h3><p>Cancelamento de ruído ativo e som Hi-Fi</p><div class="preco">R$ 399,90</div><a class="btn" onclick="verProduto('Xiaomi Redmi Buds 4 Pro','R$ 399,90','Cancelamento de ruído ativo e som Hi-Fi','Xiaomi Redmi Buds 4 Pro.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="HyperX Cloud Alpha.jpg" alt="HyperX Cloud Alpha"><h3>HyperX Cloud Alpha</h3><p>Som surround e microfone destacável</p><div class="preco">R$ 499,00</div><a class="btn" onclick="verProduto('HyperX Cloud Alpha','R$ 499,00','Som surround e microfone destacável','HyperX Cloud Alpha.jpg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="fones sony wh 1000xm3.webp" alt="Sony WH-1000XM3"><h3>Sony WH-1000XM3</h3><p>Cancelamento de ruído líder de mercado</p><div class="preco">R$ 499,90</div><a class="btn" onclick="verProduto('Sony WH-1000XM3','R$ 499,90','Cancelamento de ruído líder de mercado','fones sony wh 1000xm3.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Apple AirPods Pro.jpeg" alt="Apple AirPods Pro"><h3>Apple AirPods Pro</h3><p>Cancelamento ativo de ruído e som de alta qualidade</p><div class="preco">R$ 799,00</div><a class="btn" onclick="verProduto('Apple AirPods Pro','R$ 799,00','Cancelamento ativo de ruído e som de alta qualidade','Apple AirPods Pro.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Sony WH-1000XM4.jpeg" alt="Sony WH-1000XM4"><h3>Sony WH-1000XM4</h3><p>Cancelamento de ruído adaptativo</p><div class="preco">R$ 999,00</div><a class="btn" onclick="verProduto('Sony WH-1000XM4','R$ 999,00','Cancelamento de ruído adaptativo','Sony WH-1000XM4.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Bose QuietComfort 35 II.jpeg" alt="Bose QuietComfort 35 II"><h3>Bose QuietComfort 35 II</h3><p>Cancelamento de ruído premium</p><div class="preco">R$ 999,90</div><a class="btn" onclick="verProduto('Bose QuietComfort 35 II','R$ 999,90','Cancelamento de ruído premium','Bose QuietComfort 35 II.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="HyperX Cloud Revolver S.jpg" alt="HyperX Cloud Revolver S"><h3>HyperX Cloud Revolver S</h3><p>Surround 7.1 para gamers</p><div class="preco">R$ 999,00</div><a class="btn" onclick="verProduto('HyperX Cloud Revolver S','R$ 999,00','Surround 7.1 para gamers','HyperX Cloud Revolver S.jpg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="JBL Quantum 100.jpeg" alt="JBL Quantum 100"><h3>JBL Quantum 100</h3><p>Som surround para jogos</p><div class="preco">R$ 199,90</div><a class="btn" onclick="verProduto('JBL Quantum 100','R$ 199,90','Som surround para jogos','JBL Quantum 100.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Razer Kraken X.webp" alt="Razer Kraken X"><h3>Razer Kraken X</h3><p>Leve e confortável para longas sessões</p><div class="preco">R$ 249,90</div><a class="btn" onclick="verProduto('Razer Kraken X','R$ 249,90','Leve e confortável para longas sessões','Razer Kraken X.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Logitech G432.jpeg" alt="Logitech G432"><h3>Logitech G432</h3><p>Som DTS Headphone:X 2.0</p><div class="preco">R$ 299,90</div><a class="btn" onclick="verProduto('Logitech G432','R$ 299,90','Som DTS Headphone:X 2.0','Logitech G432.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="SteelSeries Arctis 1.jpeg" alt="SteelSeries Arctis 1"><h3>SteelSeries Arctis 1</h3><p>Versátil para PC, PS4 e Xbox</p><div class="preco">R$ 349,90</div><a class="btn" onclick="verProduto('SteelSeries Arctis 1','R$ 349,90','Versátil para PC, PS4 e Xbox','SteelSeries Arctis 1.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="SteelSeries Arctis 3.jpeg" alt="SteelSeries Arctis 3"><h3>SteelSeries Arctis 3</h3><p>Som surround para jogos</p><div class="preco">R$ 399,90</div><a class="btn" onclick="verProduto('SteelSeries Arctis 3','R$ 399,90','Som surround para jogos','SteelSeries Arctis 3.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Razer BlackShark V2.webp" alt="Razer BlackShark V2"><h3>Razer BlackShark V2</h3><p>Surround 7.1, microfone destacável</p><div class="preco">R$ 449,90</div><a class="btn" onclick="verProduto('Razer BlackShark V2','R$ 449,90','Surround 7.1, microfone destacável','Razer BlackShark V2.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Logitech G Pro X.jpeg" alt="Logitech G Pro X"><h3>Logitech G Pro X</h3><p>Headset profissional para gamers</p><div class="preco">R$ 499,90</div><a class="btn" onclick="verProduto('Logitech G Pro X','R$ 499,90','Headset profissional para gamers','Logitech G Pro X.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="HyperX Cloud II.jpeg" alt="HyperX Cloud II"><h3>HyperX Cloud II</h3><p>Surround 7.1 e conforto máximo</p><div class="preco">R$ 549,90</div><a class="btn" onclick="verProduto('HyperX Cloud II','R$ 549,90','Surround 7.1 e conforto máximo','HyperX Cloud II.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Bose SoundLink On-Ear.jpeg" alt="Bose SoundLink On-Ear"><h3>Bose SoundLink On-Ear</h3><p>Bluetooth e som premium</p><div class="preco">R$ 599,00</div><a class="btn" onclick="verProduto('Bose SoundLink On-Ear','R$ 599,00','Bluetooth e som premium','Bose SoundLink On-Ear.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Apple AirPods Max.jpeg" alt="Apple AirPods Max"><h3>Apple AirPods Max</h3><p>Over-ear premium com cancelamento ativo</p><div class="preco">R$ 1.000,00</div><a class="btn" onclick="verProduto('Apple AirPods Max','R$ 1.000,00','Over-ear premium com cancelamento ativo','Apple AirPods Max.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="JBL Club 950NC.jpeg" alt="JBL Club 950NC"><h3>JBL Club 950NC</h3><p>Cancelamento de ruído e som potente</p><div class="preco">R$ 799,90</div><a class="btn" onclick="verProduto('JBL Club 950NC','R$ 799,90','Cancelamento de ruído e som potente','JBL Club 950NC.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Sony WH-XB900N.jpg" alt="Sony WH-XB900N"><h3>Sony WH-XB900N</h3><p>Extra Bass e cancelamento de ruído</p><div class="preco">R$ 899,90</div><a class="btn" onclick="verProduto('Sony WH-XB900N','R$ 899,90','Extra Bass e cancelamento de ruído','Sony WH-XB900N.jpg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Bose 700.jpeg" alt="Bose 700"><h3>Bose 700</h3><p>Cancelamento de ruído avançado</p><div class="preco">R$ 999,00</div><a class="btn" onclick="verProduto('Bose 700','R$ 999,00','Cancelamento de ruído avançado','Bose 700.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Fone 34 HyperX Cloud Flight.webp" alt="HyperX Cloud Flight"><h3>HyperX Cloud Flight</h3><p>Wireless e Surround 7.1</p><div class="preco">R$ 699,90</div><a class="btn" onclick="verProduto('HyperX Cloud Flight','R$ 699,90','Wireless e Surround 7.1','Fone 34 HyperX Cloud Flight.webp')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Razer Nari Ultimate.jpeg" alt="Razer Nari Ultimate"><h3>Razer Nari Ultimate</h3><p>Surround 7.1 e feedback háptico</p><div class="preco">R$ 899,90</div><a class="btn" onclick="verProduto('Razer Nari Ultimate','R$ 899,90','Surround 7.1 e feedback háptico','Razer Nari Ultimate.jpeg')"href="produtos.html">Comprar</a></div>
+
+<div class="produto"><img src="Logitech G935.webp" alt="Logitech G935"><h3>Logitech G935</h3><p>Wireless e som DTS Headphone:X 2.0</p><div class="preco">R$ 999,90</div><a class="btn" onclick="verProduto('Logitech G935','R$ 999,90','Wireless e som DTS Headphone:X 2.0','Logitech G935.webp')"href="produtos.html">Comprar</a></div>
+
+
+</div>
+
+</div>
+</div>
+</div>
+<script>
+function verProduto(nome, imagens, descricao, preco){
+    localStorage.setItem('produtoSelecionado', JSON.stringify({
+        nome: nome,
+        imagens: imagens,   // Array de imagens
+        descricao: descricao,
+        preco: preco
+    }));
+    window.location.href = 'produto.html';
+}
+
+</script>
+
+<!-- CARRINHO SIMPLES -->
+<div id="carrinho">
+  <h3>Carrinho</h3>
+  <p>Vazio</p>
+  <a href="produtos.html" class="checkout-btn">Ir para o Carrinho 🛒</a>
+</div>
+
+<style>
+.checkout-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #007bff; /* azul */
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.checkout-btn:hover { 
+  background: #0056b3; 
+}
+</style>
+
+<script>
+// Carrinho básico sem alerta/modal
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function salvarCarrinho(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function adicionarAoCarrinho(nome, preco){
+  carrinho.push({nome, preco});
+  salvarCarrinho();
+}
+</script>

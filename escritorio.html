@@ -1,0 +1,286 @@
+<!DOCTYPE html> 
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Escritório</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+nav .carrinho-btn { cursor:pointer; background:#1e90ff; padding:5px 10px; border-radius:5px; }
+nav .carrinho-btn:hover { background:#0a65c0; }
+.search-bar { display:flex; justify-content:center; padding:15px; background:#f1f1f1; }
+.search-bar input { width:50%; padding:10px; border:1px solid #ccc; border-radius:5px 0 0 5px; outline:none; }
+.search-bar button { padding:10px 20px; border:none; background:#1e90ff; color:#fff; border-radius:0 5px 5px 0; cursor:pointer; font-weight:bold; }
+.search-bar button:hover { background:#0a65c0; }
+.banner { width:100%; display:block; margin-bottom:20px; }
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { text-align:center; margin-bottom:20px; }
+.produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+.produto { background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:15px; text-align:center; transition:0.3s; }
+.produto:hover { transform:translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.produto img { max-width:100%; height:150px; object-fit:contain; margin-bottom:10px; }
+.produto h3 { font-size:16px; margin-bottom:8px; }
+.produto p { font-size:14px; margin-bottom:8px; }
+.preco { font-size:16px; font-weight:bold; color:#1e90ff; margin-bottom:12px; }
+.btn { display:inline-block; background:#007bff; color:white; padding:10px 15px; border-radius:5px; text-decoration:none; cursor:pointer; }
+.btn:hover { background:#007bff; }
+#carrinho { position:fixed; top:70px; right:20px; width:280px; max-height:400px; overflow-y:auto; background:white; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.3); padding:10px; display:none; z-index:1000; }
+#carrinho h3 { margin-top:0; text-align:center; }
+#carrinho p { margin:5px 0; }
+#checkout-btn { display:block; margin:10px auto; padding:10px; background:#007bff; color:#fff; text-align:center; border-radius:5px; cursor:pointer; text-decoration:none; width:90%; }
+#checkout-btn:hover { background:#007bff; }
+</style>
+</head>
+<body>
+<header>
+<img src="img/logo.png" alt="World Tech Logo">
+</header>
+
+<nav>
+<a href="world-itens%20tecnologicos.html">Telefones</a>
+<a href="fones-de-ouvido-html.html">Fones de Ouvido</a>
+<a href="impressora-html.html">Impressoras</a>
+<a href="computadores-html.html">Computadores</a>
+<a href="escritorio.html">Escritório</a>
+<a href="acessorios-html.html">Acessórios</a>
+<a href="games-console.html">games&console</a>
+<a href="#" class="carrinho-btn" onclick="toggleCarrinho()">Carrinho 🛒</a>
+</nav>
+<!-- Barra de busca funcional -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+  <button id="searchBtn">Pesquisar</button>
+</div>
+<style>
+/* Estilo da barra de busca */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f1f1f1;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1 1 300px;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  min-width: 150px;
+}
+
+.search-bar button {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border: none;
+  background: #1e90ff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-bar button:hover {
+  background: #0a65c0;
+}
+</style>
+
+<script>
+// Função para filtrar produtos
+function filtrarProdutos() {
+  const searchValue = document.getElementById('searchInput').value.toLowerCase();
+  const produtos = document.querySelectorAll('.produto');
+
+  produtos.forEach(produto => {
+    const nome = produto.querySelector('h3').innerText.toLowerCase();
+    if(nome.includes(searchValue) || searchValue === "") {
+      produto.style.display = 'block';
+    } else {
+      produto.style.display = 'none';
+    }
+  });
+}
+
+// Executa ao clicar no botão
+document.getElementById('searchBtn').addEventListener('click', filtrarProdutos);
+
+// Executa ao pressionar Enter no campo de busca
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if(e.key === 'Enter') {
+    e.preventDefault();
+    filtrarProdutos();
+  }
+});
+</script>
+<section>
+<img src="img/banner.png" class="banner" alt="Promoção World Tech">
+</section>
+
+<div class="container">
+<h2>Produtos de Escritório</h2>
+<div class="produtos">
+<!-- 40 produtos de Escritório -->
+
+<div class="produto"><img src="img/organizador-cabos.png" alt="Organizador de Cabos"><h3>Organizador de Cabos</h3><p>Silicone flexível</p><div class="preco">R$ 49,00</div><a class="btn" onclick="adicionarAoCarrinho('Organizador de Cabos','R$ 49,00')">Comprar</a></div>
+<div class="produto"><img src="img/calculadora.png" alt="Calculadora Científica"><h3>Calculadora Científica</h3><p>12 dígitos, bateria longa</p><div class="preco">R$ 79,00</div><a class="btn" onclick="adicionarAoCarrinho('Calculadora Científica','R$ 79,00')">Comprar</a></div>
+<div class="produto"><img src="img/organizador-gavetas.png" alt="Organizador de Gavetas"><h3>Organizador de Gavetas</h3><p>Plástico, 6 divisórias</p><div class="preco">R$ 129,00</div><a class="btn" onclick="adicionarAoCarrinho('Organizador de Gavetas','R$ 129,00')">Comprar</a></div>
+<div class="produto"><img src="img/porta-livros.png" alt="Porta Livros"><h3>Porta Livros Modular</h3><p>Madeira MDF</p><div class="preco">R$ 149,00</div><a class="btn" onclick="adicionarAoCarrinho('Porta Livros Modular','R$ 149,00')">Comprar</a></div>
+<div class="produto"><img src="img/lampara-led.png" alt="Lâmpada LED Inteligente"><h3>Lâmpada LED Inteligente</h3><p>RGB, Wi-Fi controlável</p><div class="preco">R$ 159,00</div><a class="btn" onclick="adicionarAoCarrinho('Lâmpada LED Inteligente','R$ 159,00')">Comprar</a></div>
+<div class="produto"><img src="img/suporte-monitor.png" alt="Suporte de Monitor"><h3>Suporte para Monitor</h3><p>Altura ajustável</p><div class="preco">R$ 199,00</div><a class="btn" onclick="adicionarAoCarrinho('Suporte para Monitor','R$ 199,00')">Comprar</a></div>
+<div class="produto"><img src="img/mouse-gamer.png" alt="Mouse Gamer"><h3>Mouse Gamer</h3><p>RGB, 16000 DPI</p><div class="preco">R$ 199,00</div><a class="btn" onclick="adicionarAoCarrinho('Mouse Gamer','R$ 199,00')">Comprar</a></div>
+<div class="produto"><img src="img/headset.png" alt="Headset Gamer"><h3>Headset Gamer</h3><p>Com microfone, RGB</p><div class="preco">R$ 249,00</div><a class="btn" onclick="adicionarAoCarrinho('Headset Gamer','R$ 249,00')">Comprar</a></div>
+<div class="produto"><img src="img/teclado-mecanico.png" alt="Teclado Mecânico"><h3>Teclado Mecânico</h3><p>RGB, USB</p><div class="preco">R$ 299,00</div><a class="btn" onclick="adicionarAoCarrinho('Teclado Mecânico','R$ 299,00')">Comprar</a></div>
+<div class="produto"><img src="img/relógio-ponto.png" alt="Relógio de Ponto"><h3>Relógio de Ponto Digital</h3><p>Controle de acesso fácil</p><div class="preco">R$ 599,00</div><a class="btn" onclick="adicionarAoCarrinho('Relógio de Ponto Digital','R$ 599,00')">Comprar</a></div>
+<div class="produto"><img src="img/armario-escritorio.png" alt="Armário de Escritório"><h3>Armário Organizador</h3><p>3 gavetas, aço resistente</p><div class="preco">R$ 699,00</div><a class="btn" onclick="adicionarAoCarrinho('Armário Organizador','R$ 699,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-escritorio.png" alt="Mesa de Escritório"><h3>Mesa Escritório 1,2m</h3><p>Madeira MDF, resistente</p><div class="preco">R$ 499,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa Escritório 1,2m','R$ 499,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-escritorio.png" alt="Cadeira de Escritório"><h3>Cadeira Ergonômica</h3><p>Ajustável, conforto premium</p><div class="preco">R$ 899,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Ergonômica','R$ 899,00')">Comprar</a></div>
+<div class="produto"><img src="img/impressora-multifuncional.png" alt="Impressora Multifuncional"><h3>Impressora Multifuncional</h3><p>Laser, Wi-Fi, A4</p><div class="preco">R$ 1.199,00</div><a class="btn" onclick="adicionarAoCarrinho('Impressora Multifuncional','R$ 1.199,00')">Comprar</a></div>
+<div class="produto"><img src="img/projetor-portatil.png" alt="Projetor Portátil"><h3>Projetor Portátil</h3><p>1080p, HDMI, compacto</p><div class="preco">R$ 1.299,00</div><a class="btn" onclick="adicionarAoCarrinho('Projetor Portátil','R$ 1.299,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-ergonomica-premium.png" alt="Cadeira Ergonômica Premium"><h3>Cadeira Ergonômica Premium</h3><p>Couro sintético, regulagem total</p><div class="preco">R$ 1.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Ergonômica Premium','R$ 1.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-escritorio-2m.png" alt="Mesa Escritório 2m"><h3>Mesa Escritório 2m</h3><p>MDF reforçado, amplo espaço</p><div class="preco">R$ 1.699,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa Escritório 2m','R$ 1.699,00')">Comprar</a></div>
+<div class="produto"><img src="img/estante-metalica.png" alt="Estante Metálica"><h3>Estante Metálica</h3><p>5 prateleiras, alta resistência</p><div class="preco">R$ 1.899,00</div><a class="btn" onclick="adicionarAoCarrinho('Estante Metálica','R$ 1.899,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-gamer.png" alt="Cadeira Gamer"><h3>Cadeira Gamer</h3><p>Suporte lombar, RGB</p><div class="preco">R$ 2.199,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Gamer','R$ 2.199,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-gerente.png" alt="Mesa de Gerente"><h3>Mesa de Gerente Luxo</h3><p>Madeira nobre, 2m</p><div class="preco">R$ 2.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa de Gerente Luxo','R$ 2.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/impressora-colorida.png" alt="Impressora Colorida"><h3>Impressora Colorida</h3><p>Laser, A3, Wi-Fi</p><div class="preco">R$ 2.799,00</div><a class="btn" onclick="adicionarAoCarrinho('Impressora Colorida','R$ 2.799,00')">Comprar</a></div>
+<div class="produto"><img src="img/projetor-fullhd.png" alt="Projetor Full HD"><h3>Projetor Full HD</h3><p>3000 lumens, HDMI/USB</p><div class="preco">R$ 2.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Projetor Full HD','R$ 2.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-diretoria.png" alt="Mesa Diretoria"><h3>Mesa de Diretoria</h3><p>Madeira maciça, 2,2m</p><div class="preco">R$ 3.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa de Diretoria','R$ 3.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-luxo.png" alt="Cadeira Luxo"><h3>Cadeira Luxo Escritório</h3><p>Couro legítimo, reclinável</p><div class="preco">R$ 3.799,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Luxo Escritório','R$ 3.799,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-luxo.png" alt="Mesa Luxo"><h3>Mesa Luxo Escritório</h3><p>Madeira nobre, acabamento premium</p><div class="preco">R$ 4.199,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa Luxo Escritório','R$ 4.199,00')">Comprar</a></div>
+<div class="produto"><img src="img/armario-luxo.png" alt="Armário Luxo"><h3>Armário Luxo Escritório</h3><p>Madeira nobre, portas de vidro</p><div class="preco">R$ 4.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Armário Luxo Escritório','R$ 4.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/projetor-4k.png" alt="Projetor 4K"><h3>Projetor 4K Ultra HD</h3><p>5000 lumens, HDMI/USB</p><div class="preco">R$ 4.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Projetor 4K Ultra HD','R$ 4.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-executivo.png" alt="Mesa Executivo"><h3>Mesa Executivo</h3><p>Madeira maciça, 2,5m</p><div class="preco">R$ 5.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa Executivo','R$ 5.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-executivo.png" alt="Cadeira Executivo"><h3>Cadeira Executivo Luxo</h3><p>Couro legítimo, reclinável, massagem</p><div class="preco">R$ 5.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Executivo Luxo','R$ 5.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/estante-luxo.png" alt="Estante Luxo"><h3>Estante Luxo Escritório</h3><p>Madeira nobre, 6 prateleiras</p><div class="preco">R$ 6.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Estante Luxo Escritório','R$ 6.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/projetor-executivo.png" alt="Projetor Executivo"><h3>Projetor Executivo 4K</h3><p>7000 lumens, HDMI/USB</p><div class="preco">R$ 6.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Projetor Executivo 4K','R$ 6.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-presidencial.png" alt="Mesa Presidencial"><h3>Mesa Presidencial</h3><p>Madeira maciça, 3m</p><div class="preco">R$ 7.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa Presidencial','R$ 7.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-presidencial.png" alt="Cadeira Presidencial"><h3>Cadeira Presidencial</h3><p>Couro legítimo, reclinável, massagem total</p><div class="preco">R$ 7.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Presidencial','R$ 7.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/armario-presidencial.png" alt="Armário Presidencial"><h3>Armário Presidencial</h3><p>Madeira nobre, portas de vidro temperado</p><div class="preco">R$ 8.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Armário Presidencial','R$ 8.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/projetor-8k.png" alt="Projetor 8K"><h3>Projetor 8K Ultra HD</h3><p>10000 lumens, HDMI/USB</p><div class="preco">R$ 8.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Projetor 8K Ultra HD','R$ 8.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/mesa-luxo-executivo.png" alt="Mesa Luxo Executivo"><h3>Mesa Luxo Executivo</h3><p>Madeira nobre, acabamento premium, 2,8m</p><div class="preco">R$ 9.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Mesa Luxo Executivo','R$ 9.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-luxo-executivo.png" alt="Cadeira Luxo Executivo"><h3>Cadeira Luxo Executivo</h3><p>Couro legítimo, reclinável, massagem total</p><div class="preco">R$ 9.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Luxo Executivo','R$ 9.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/armario-luxo-executivo.png" alt="Armário Luxo Executivo"><h3>Armário Luxo Executivo</h3><p>Madeira nobre, portas de vidro temperado, 6 gavetas</p><div class="preco">R$ 10.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Armário Luxo Executivo','R$ 10.499,00')">Comprar</a></div>
+<div class="produto"><img src="img/projetor-ultra-8k.png" alt="Projetor Ultra 8K"><h3>Projetor Ultra 8K</h3><p>12000 lumens, HDR, HDMI/USB</p><div class="preco">R$ 10.999,00</div><a class="btn" onclick="adicionarAoCarrinho('Projetor Ultra 8K','R$ 10.999,00')">Comprar</a></div>
+<div class="produto"><img src="img/cadeira-presidencial-elite.png" alt="Cadeira Presidencial Elite"><h3>Cadeira Presidencial Elite</h3><p>Couro legítimo, reclinável, massagem total, base premium em alumínio</p><div class="preco">R$ 11.499,00</div><a class="btn" onclick="adicionarAoCarrinho('Cadeira Presidencial Elite','R$ 11.499,00')">Comprar</a></div>
+</div>
+</div>
+<!-- CARRINHO -->
+<div id="carrinho">
+  <h3>Carrinho</h3>
+  <p>Vazio</p>
+  <a href="checkout.html" class="checkout-btn">Finalizar Compra</a>
+</div>
+
+<!-- Modal de Imagem -->
+<div id="modalProduto" class="modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000;">
+  <span class="fechar" onclick="fecharModal()" style="cursor:pointer;font-size:28px;position:absolute;right:20px;top:10px;color:#fff;">&times;</span>
+  <img class="modal-conteudo" id="imgModal" style="max-width:90%; max-height:80vh; display:block; margin:60px auto 10px;">
+  <div id="caption" style="text-align:center;color:#fff;"></div>
+</div>
+
+<style>
+.checkout-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #007bff; /* azul */
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.checkout-btn:hover { background: #007bff; }
+
+.remove-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 2px 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.remove-btn:hover { background: #007bff; }
+</style>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function salvarCarrinho(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function parsePrice(precoStr){
+  if(!precoStr) return 0;
+  let s = String(precoStr).trim().replace(/[^\d\.,-]/g,'');
+  s = s.replace(/\./g,'').replace(/,/g,'.');
+  const n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+}
+
+function atualizarCarrinho(){
+  const div=document.getElementById('carrinho');
+  if(carrinho.length===0){
+    div.innerHTML='<h3>Carrinho</h3><p>Vazio</p><a href="checkout.html" class="checkout-btn">Finalizar Compra</a>';
+    return;
+  }
+  let html='<h3>Carrinho</h3>';
+  let total = 0;
+  carrinho.forEach((item,index)=>{
+    let valor = parsePrice(item.preco);
+    total += valor;
+    html += `<p>${item.nome} - ${item.preco} <button class="remove-btn" onclick="removerDoCarrinho(${index})">x</button></p>`;
+  });
+  html += `<p><strong>Total de itens: ${carrinho.length}</strong></p>`;
+  html += `<p><strong>Valor total: R$ ${total.toFixed(2).replace('.',',')}</strong></p>`;
+  html += `<a href="checkout.html" class="checkout-btn">Finalizar Compra</a>`;
+  div.innerHTML = html;
+}
+
+// Controle do alerta para não repetir
+let alertaAtivo = false;
+
+function adicionarAoCarrinho(nome, preco){
+  carrinho.push({nome, preco});
+  salvarCarrinho();
+  atualizarCarrinho();
+  if(!alertaAtivo){
+    alertaAtivo = true;
+    alert(nome+' adicionado ao carrinho!');
+    alertaAtivo = false;
+  }
+}
+
+function removerDoCarrinho(index){
+  carrinho.splice(index,1);
+  salvarCarrinho();
+  atualizarCarrinho();
+}
+
+function toggleCarrinho(){
+  const div=document.getElementById('carrinho');
+  div.style.display = div.style.display==='block'?'none':'block';
+}
+
+function abrirModal(imgSrc, titulo){
+  document.getElementById("modalProduto").style.display = "block";
+  document.getElementById("imgModal").src = imgSrc;
+  document.getElementById("caption").innerHTML = titulo;
+}
+function fecharModal(){
+  document.getElementById("modalProduto").style.display = "none";
+}
+
+// Inicializa carrinho ao carregar a página
+document.addEventListener('DOMContentLoaded', atualizarCarrinho);
+</script>
+</body>
+</html>

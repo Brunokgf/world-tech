@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Computadores</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+nav .carrinho-btn { cursor:pointer; background:#1e90ff; padding:5px 10px; border-radius:5px; }
+nav .carrinho-btn:hover { background:#0a65c0; }
+.search-bar { display:flex; justify-content:center; padding:15px; background:#f1f1f1; }
+.search-bar input { width:50%; padding:10px; border:1px solid #ccc; border-radius:5px 0 0 5px; outline:none; }
+.search-bar button { padding:10px 20px; border:none; background:#1e90ff; color:#fff; border-radius:0 5px 5px 0; cursor:pointer; font-weight:bold; }
+.search-bar button:hover { background:#0a65c0; }
+.banner { width:100%; display:block; margin-bottom:20px; }
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { text-align:center; margin-bottom:20px; }
+.produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+.produto { background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:15px; text-align:center; transition:0.3s; }
+.produto:hover { transform:translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.produto img { max-width:100%; height:150px; object-fit:contain; margin-bottom:10px; }
+.produto h3 { font-size:16px; margin-bottom:8px; }
+.produto p { font-size:14px; margin-bottom:8px; }
+.preco { font-size:16px; font-weight:bold; color:#1e90ff; margin-bottom:12px; }
+.btn { display:inline-block; background:#1e90ff; color:white; padding:10px 15px; border-radius:5px; text-decoration:none; cursor:pointer; }
+.btn:hover { background:#0a65c0; }
+#carrinho { position:fixed; top:70px; right:20px; width:280px; max-height:400px; overflow-y:auto; background:white; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.3); padding:10px; display:none; z-index:1000; }
+#carrinho h3 { margin-top:0; text-align:center; }
+#carrinho p { margin:5px 0; }
+#carrinho .total { font-weight:bold; color:#1e90ff; text-align:right; margin-top:10px; }
+#carrinho .checkout-btn { display:block; margin-top:10px; padding:8px 12px; background:#007bff; color:#fff; text-align:center; border-radius:5px; text-decoration:none; }
+#carrinho .checkout-btn:hover { background:#007bff; }
+</style>
+</head>
+<body>
+<header>
+<img src="img/logo.png" alt="World Tech Logo">
+</header>
+
+<nav>
+<a href="world-itens%20tecnologicos.html">Telefones</a>
+<a href="fones-de-ouvido-html.html">Fones de Ouvido</a>
+<a href="impressora-html.html">Impressoras</a>
+<a href="computadores-html.html">Computadores</a>
+<a href="escritorio-html.html">Escritório</a>
+<a href="acessorios-html.html">Acessórios</a>
+<a href="games-console.html">games&console</a>
+<a href="carrinho.html" class="carrinho-btn">Carrinho 🛒</a>
+</nav>
+<!-- Barra de busca funcional -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+  <button id="searchBtn">Pesquisar</button>
+</div>
+<style>
+/* Estilo da barra de busca */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f1f1f1;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1 1 300px;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  min-width: 150px;
+}
+
+.search-bar button {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border: none;
+  background: #1e90ff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-bar button:hover {
+  background: #0a65c0;
+}
+</style>
+
+<script>
+// Função para filtrar produtos
+function filtrarProdutos() {
+  const searchValue = document.getElementById('searchInput').value.toLowerCase();
+  const produtos = document.querySelectorAll('.produto');
+
+  produtos.forEach(produto => {
+    const nome = produto.querySelector('h3').innerText.toLowerCase();
+    if(nome.includes(searchValue) || searchValue === "") {
+      produto.style.display = 'block';
+    } else {
+      produto.style.display = 'none';
+    }
+  });
+}
+
+// Executa ao clicar no botão
+document.getElementById('searchBtn').addEventListener('click', filtrarProdutos);
+
+// Executa ao pressionar Enter no campo de busca
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if(e.key === 'Enter') {
+    e.preventDefault();
+    filtrarProdutos();
+  }
+});
+</script>
+
+<section>
+<img src="img/banner.png" class="banner" alt="Promoção World Tech">
+</section>
+
+<div class="container">
+<h2>Computadores</h2>
+<div class="produtos">
+
+  <!-- Produtos de Computadores --> 
+<div class="produto"><img src="img/positivo-motion-c100.png" alt="Positivo Motion "><h3>Positivo Motion </h3><p>Celeron, 4GB RAM, 64GB eMMC</p><div class="preco">R$ 899,00</div><a class="btn" onclick="verProduto('Positivo Motion ','R$ 899,00','Celeron, 4GB RAM, 64GB eMMC','img/positivo-motion-c100.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/multilaser-prime11.png" alt="Multilaser Prime 11"><h3>Multilaser Prime 11</h3><p>Atom, 4GB RAM, 64GB eMMC</p><div class="preco">R$ 999,00</div><a class="btn" onclick="verProduto('Multilaser Prime 11','R$ 999,00','Atom, 4GB RAM, 64GB eMMC','img/multilaser-prime11.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/positivo-duo-c464d.png" alt="Positivo Duo C464D"><h3>Positivo Duo C464D</h3><p>Intel Atom, 4GB RAM, 64GB eMMC</p><div class="preco">R$ 1.049,00</div><a class="btn" onclick="verProduto('Positivo Duo C464D','R$ 1.049,00','Intel Atom, 4GB RAM, 64GB eMMC','img/positivo-duo-c464d.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-slim-1.png" alt="Lenovo IdeaPad Slim 1"><h3>Lenovo IdeaPad Slim 1</h3><p>Celeron, 4GB RAM, 128GB SSD</p><div class="preco">R$ 1.149,00</div><a class="btn" onclick="verProduto('Lenovo IdeaPad Slim 1','R$ 1.149,00','Celeron, 4GB RAM, 128GB SSD','img/lenovo-slim-1.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/samsung-chromebook.png" alt="Samsung Chromebook"><h3>Samsung Chromebook</h3><p>Celeron, 4GB RAM, 64GB eMMC</p><div class="preco">R$ 1.299,00</div><a class="btn" onclick="verProduto('Samsung Chromebook','R$ 1.299,00','Celeron, 4GB RAM, 64GB eMMC','img/samsung-chromebook.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/positivo-stilo-xr2990.png" alt="Positivo Stilo XR2990"><h3>Positivo Stilo XR2990</h3><p>Celeron, 4GB RAM, 120GB SSD</p><div class="preco">R$ 1.399,00</div><a class="btn" onclick="verProduto('Positivo Stilo XR2990','R$ 1.399,00','Celeron, 4GB RAM, 120GB SSD','img/positivo-stilo-xr2990.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/acer-chromebook-314.png" alt="Acer Chromebook 314"><h3>Acer Chromebook 314</h3><p>Celeron, 4GB RAM, 64GB eMMC</p><div class="preco">R$ 1.499,00</div><a class="btn" onclick="verProduto('Acer Chromebook 314','R$ 1.499,00','Celeron, 4GB RAM, 64GB eMMC','img/acer-chromebook-314.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/positivo-master.png" alt="Positivo Master"><h3>Positivo Master</h3><p>AMD A4, 4GB RAM, 500GB HDD</p><div class="preco">R$ 1.599,00</div><a class="btn" onclick="verProduto('Positivo Master','R$ 1.599,00','AMD A4, 4GB RAM, 500GB HDD','img/positivo-master.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/acer-aspire-3.png" alt="Acer Aspire 3"><h3>Acer Aspire 3</h3><p>AMD Ryzen 3, 4GB RAM, 128GB SSD</p><div class="preco">R$ 1.799,00</div><a class="btn" onclick="verProduto('Acer Aspire 3','R$ 1.799,00','AMD Ryzen 3, 4GB RAM, 128GB SSD','img/acer-aspire-3.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-v14.png" alt="Lenovo V14"><h3>Lenovo V14</h3><p>i3, 8GB RAM, 256GB SSD</p><div class="preco">R$ 2.499,00</div><a class="btn" onclick="verProduto('Lenovo V14','R$ 2.499,00','i3, 8GB RAM, 256GB SSD','img/lenovo-v14.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-x515.png" alt="ASUS X515"><h3>ASUS X515</h3><p>i3, 8GB RAM, 256GB SSD</p><div class="preco">R$ 2.699,00</div><a class="btn" onclick="verProduto('ASUS X515','R$ 2.699,00','i3, 8GB RAM, 256GB SSD','img/asus-x515.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/samsung-book-intel-i3.png" alt="Samsung Book"><h3>Samsung Book</h3><p>i3, 8GB RAM, 256GB SSD</p><div class="preco">R$ 2.899,00</div><a class="btn" onclick="verProduto('Samsung Book','R$ 2.899,00','i3, 8GB RAM, 256GB SSD','img/samsung-book-intel-i3.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/hp-240-g9.png" alt="HP 240 G9"><h3>HP 240 G9</h3><p>i3, 8GB RAM, 256GB SSD</p><div class="preco">R$ 2.999,00</div><a class="btn" onclick="verProduto('HP 240 G9','R$ 2.999,00','i3, 8GB RAM, 256GB SSD','img/hp-240-g9.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/dell-inspiron-15.png" alt="Dell Inspiron 15"><h3>Dell Inspiron 15</h3><p>i5, 8GB RAM, 256GB SSD</p><div class="preco">R$ 3.299,00</div><a class="btn" onclick="verProduto('Dell Inspiron 15','R$ 3.299,00','i5, 8GB RAM, 256GB SSD','img/dell-inspiron-15.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/acer-aspire-5.png" alt="Acer Aspire 5"><h3>Acer Aspire 5</h3><p>i5, 8GB RAM, 512GB SSD</p><div class="preco">R$ 3.499,00</div><a class="btn" onclick="verProduto('Acer Aspire 5','R$ 3.499,00','i5, 8GB RAM, 512GB SSD','img/acer-aspire-5.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-ideapad-3.png" alt="Lenovo IdeaPad 3"><h3>Lenovo IdeaPad 3</h3><p>Ryzen 5, 8GB RAM, 256GB SSD</p><div class="preco">R$ 3.699,00</div><a class="btn" onclick="verProduto('Lenovo IdeaPad 3','R$ 3.699,00','Ryzen 5, 8GB RAM, 256GB SSD','img/lenovo-ideapad-3.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-vivobook-15.png" alt="ASUS VivoBook 15"><h3>ASUS VivoBook 15</h3><p>Ryzen 5, 8GB RAM, 512GB SSD</p><div class="preco">R$ 3.899,00</div><a class="btn" onclick="verProduto('ASUS VivoBook 15','R$ 3.899,00','Ryzen 5, 8GB RAM, 512GB SSD','img/asus-vivobook-15.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/hp-250-g9.png" alt="HP 250 G9"><h3>HP 250 G9</h3><p>i5, 8GB RAM, 512GB SSD</p><div class="preco">R$ 3.999,00</div><a class="btn" onclick="verProduto('HP 250 G9','R$ 3.999,00','i5, 8GB RAM, 512GB SSD','img/hp-250-g9.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/samsung-book-ryzen7.png" alt="Samsung Book Ryzen 7"><h3>Samsung Book</h3><p>Ryzen 7, 8GB RAM, 512GB SSD</p><div class="preco">R$ 4.199,00</div><a class="btn" onclick="verProduto('Samsung Book Ryzen 7','R$ 4.199,00','Ryzen 7, 8GB RAM, 512GB SSD','img/samsung-book-ryzen7.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/dell-vostro-3400.png" alt="Dell Vostro 3400"><h3>Dell Vostro 3400</h3><p>i5, 8GB RAM, 512GB SSD</p><div class="preco">R$ 4.399,00</div><a class="btn" onclick="verProduto('Dell Vostro 3400','R$ 4.399,00','i5, 8GB RAM, 512GB SSD','img/dell-vostro-3400.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-zenbook-14.png" alt="ASUS ZenBook 14"><h3>ASUS ZenBook 14</h3><p>Ryzen 7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 4.799,00</div><a class="btn" onclick="verProduto('ASUS ZenBook 14','R$ 4.799,00','Ryzen 7, 16GB RAM, 512GB SSD','img/asus-zenbook-14.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-ideapad-5.png" alt="Lenovo IdeaPad 5"><h3>Lenovo IdeaPad 5</h3><p>i7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 4.999,00</div><a class="btn" onclick="verProduto('Lenovo IdeaPad 5','R$ 4.999,00','i7, 16GB RAM, 512GB SSD','img/lenovo-ideapad-5.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/acer-aspire-7.png" alt="Acer Aspire 7"><h3>Acer Aspire 7</h3><p>Ryzen 7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 5.199,00</div><a class="btn" onclick="verProduto('Acer Aspire 7','R$ 5.199,00','Ryzen 7, 16GB RAM, 512GB SSD','img/acer-aspire-7.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/dell-inspiron-14.png" alt="Dell Inspiron 14"><h3>Dell Inspiron 14</h3><p>i7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 5.399,00</div><a class="btn" onclick="verProduto('Dell Inspiron 14','R$ 5.399,00','i7, 16GB RAM, 512GB SSD','img/dell-inspiron-14.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-vivobook-pro.png" alt="ASUS VivoBook Pro"><h3>ASUS VivoBook Pro</h3><p>Ryzen 7, 16GB RAM, 1TB SSD</p><div class="preco">R$ 5.699,00</div><a class="btn" onclick="verProduto('ASUS VivoBook Pro','R$ 5.699,00','Ryzen 7, 16GB RAM, 1TB SSD','img/asus-vivobook-pro.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/hp-pavilion-15.png" alt="HP Pavilion 15"><h3>HP Pavilion 15</h3><p>i7, 16GB RAM, 1TB SSD</p><div class="preco">R$ 5.899,00</div><a class="btn" onclick="verProduto('HP Pavilion 15','R$ 5.899,00','i7, 16GB RAM, 1TB SSD','img/hp-pavilion-15.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-thinkbook-14.png" alt="Lenovo ThinkBook 14"><h3>Lenovo ThinkBook 14</h3><p>i7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 6.099,00</div><a class="btn" onclick="verProduto('Lenovo ThinkBook 14','R$ 6.099,00','i7, 16GB RAM, 512GB SSD','img/lenovo-thinkbook-14.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-zenbook-15.png" alt="ASUS ZenBook 15"><h3>ASUS ZenBook 15</h3><p>i7, 16GB RAM, 1TB SSD</p><div class="preco">R$ 6.499,00</div><a class="btn" onclick="verProduto('ASUS ZenBook 15','R$ 6.499,00','i7, 16GB RAM, 1TB SSD','img/asus-zenbook-15.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/dell-latitude-3420.png" alt="Dell Latitude 3420"><h3>Dell Latitude 3420</h3><p>i7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 6.799,00</div><a class="btn" onclick="verProduto('Dell Latitude 3420','R$ 6.799,00','i7, 16GB RAM, 512GB SSD','img/dell-latitude-3420.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-yoga-6.png" alt="Lenovo Yoga 6"><h3>Lenovo Yoga 6</h3><p>Ryzen 7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 6.999,00</div><a class="btn" onclick="verProduto('Lenovo Yoga 6','R$ 6.999,00','Ryzen 7, 16GB RAM, 512GB SSD','img/lenovo-yoga-6.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/samsung-galaxy-book2.png" alt="Samsung Galaxy Book2"><h3>Samsung Galaxy Book2</h3><p>i7, 16GB RAM, 512GB SSD</p><div class="preco">R$ 7.299,00</div><a class="btn" onclick="verProduto('Samsung Galaxy Book2','R$ 7.299,00','i7, 16GB RAM, 512GB SSD','img/samsung-galaxy-book2.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/hp-envy-x360.png" alt="HP Envy x360"><h3>HP Envy x360</h3><p>Ryzen 7, 16GB RAM, 1TB SSD</p><div class="preco">R$ 7.499,00</div><a class="btn" onclick="verProduto('HP Envy x360','R$ 7.499,00','Ryzen 7, 16GB RAM, 1TB SSD','img/hp-envy-x360.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-rog-zephyrus-g14.png" alt="ASUS ROG Zephyrus G14"><h3>ASUS ROG Zephyrus G14</h3><p>Ryzen 9, 16GB RAM, RTX 3060, 1TB SSD</p><div class="preco">R$ 7.899,00</div><a class="btn" onclick="verProduto('ASUS ROG Zephyrus G14','R$ 7.899,00','Ryzen 9, 16GB RAM, RTX 3060, 1TB SSD','img/asus-rog-zephyrus-g14.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/dell-xps-13.png" alt="Dell XPS 13"><h3>Dell XPS 13</h3><p>i7, 16GB RAM, 1TB SSD</p><div class="preco">R$ 8.199,00</div><a class="btn" onclick="verProduto('Dell XPS 13','R$ 8.199,00','i7, 16GB RAM, 1TB SSD','img/dell-xps-13.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-legion-5.png" alt="Lenovo Legion 5"><h3>Lenovo Legion 5</h3><p>Ryzen 7, RTX 3060, 16GB RAM, 1TB SSD</p><div class="preco">R$ 8.499,00</div><a class="btn" onclick="verProduto('Lenovo Legion 5','R$ 8.499,00','Ryzen 7, RTX 3060, 16GB RAM, 1TB SSD','img/lenovo-legion-5.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/acer-predator-helios.png" alt="Acer Predator Helios"><h3>Acer Predator Helios</h3><p>i7, RTX 3070, 16GB RAM, 1TB SSD</p><div class="preco">R$ 8.999,00</div><a class="btn" onclick="verProduto('Acer Predator Helios','R$ 8.999,00','i7, RTX 3070, 16GB RAM, 1TB SSD','img/acer-predator-helios.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-tuf-gaming-f15.png" alt="ASUS TUF Gaming F15"><h3>ASUS TUF Gaming F15</h3><p>i7, RTX 4060, 16GB RAM, 1TB SSD</p><div class="preco">R$ 9.299,00</div><a class="btn" onclick="verProduto('ASUS TUF Gaming F15','R$ 9.299,00','i7, RTX 4060, 16GB RAM, 1TB SSD','img/asus-tuf-gaming-f15.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/hp-omen-16.png" alt="HP Omen 16"><h3>HP Omen 16</h3><p>Ryzen 9, RTX 4070, 16GB RAM, 1TB SSD</p><div class="preco">R$ 9.799,00</div><a class="btn" onclick="verProduto('HP Omen 16','R$ 9.799,00','Ryzen 9, RTX 4070, 16GB RAM, 1TB SSD','img/hp-omen-16.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/lenovo-legion-7.png" alt="Lenovo Legion 7"><h3>Lenovo Legion 7</h3><p>Ryzen 9, RTX 4080, 32GB RAM, 1TB SSD</p><div class="preco">R$ 10.499,00</div><a class="btn" onclick="verProduto('Lenovo Legion 7','R$ 10.499,00','Ryzen 9, RTX 4080, 32GB RAM, 1TB SSD','img/lenovo-legion-7.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/asus-rog-strix-scar16.png" alt="ASUS ROG Strix Scar 16"><h3>ASUS ROG Strix Scar 16</h3><p>i9, RTX 4090, 32GB RAM, 2TB SSD</p><div class="preco">R$ 11.999,00</div><a class="btn" onclick="verProduto('ASUS ROG Strix Scar 16','R$ 11.999,00','i9, RTX 4090, 32GB RAM, 2TB SSD','img/asus-rog-strix-scar16.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/dell-xps-15.png" alt="Dell XPS 15"><h3>Dell XPS 15</h3><p>i9, 32GB RAM, RTX 4060, 1TB SSD</p><div class="preco">R$ 12.499,00</div><a class="btn" onclick="verProduto('Dell XPS 15','R$ 12.499,00','i9, 32GB RAM, RTX 4060, 1TB SSD','img/dell-xps-15.png')" href="produtos.html">Comprar</a></div>
+<div class="produto"><img src="img/razer-blade-16.png" alt="Razer Blade 16"><h3>Razer Blade 16</h3><p>i9, RTX 4090, 32GB RAM, 2TB SSD</p><div class="preco">R$ 14.999,00</div><a class="btn" onclick="verProduto('Razer Blade 16','R$ 14.999,00','i9, RTX 4090, 32GB RAM, 2TB SSD','img/razer-blade-16.png')" href="produtos.html">Comprar</a></div>
+<script>
+function verProduto(nome, imagens, descricao, preco){
+    localStorage.setItem('produtoSelecionado', JSON.stringify({
+        nome: nome,
+        imagens: imagens,   // Array de imagens
+        descricao: descricao,
+        preco: preco
+    }));
+    window.location.href = 'produto.html';
+}
+
+</script>
+<!-- CARRINHO SIMPLES -->
+<div id="carrinho">
+  <h3>Carrinho</h3>
+  <p>Vazio</p>
+  <a href="produtos.html" class="checkout-btn">Ir para o Carrinho 🛒</a>
+</div>
+
+<style>
+.checkout-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #007bff; /* azul */
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.checkout-btn:hover { 
+  background: #0056b3; 
+}
+</style>
+
+<script>
+// Carrinho básico sem alerta/modal
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function salvarCarrinho(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function adicionarAoCarrinho(nome, preco){
+  carrinho.push({nome, preco});
+  salvarCarrinho();
+}
+</script>

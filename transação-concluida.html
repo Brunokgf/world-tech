@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transação Concluída — Obrigado pela sua compra</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#10b981;--muted:#9aa4b2;--glass:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#071028 0%, #071428 60%); color:#e6eef6; -webkit-font-smoothing:antialiased}
+    .container{max-width:980px;margin:40px auto;padding:24px}
+    .card{background:linear-gradient(180deg,var(--card), rgba(9,12,20,0.6));border-radius:14px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.6);}
+    .header{display:flex;align-items:center;gap:18px}
+    .check{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#052f20,#06382b);box-shadow:0 8px 30px rgba(16,185,129,0.12), inset 0 -4px 10px rgba(0,0,0,0.4)}
+    .check svg{width:44px;height:44px}
+    h1{margin:0;font-size:22px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:22px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr}.container{margin:18px;padding:16px}}
+
+    .order-info{background:var(--glass);padding:18px;border-radius:10px}
+    .order-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .order-row:last-child{border-bottom:0}
+    .muted{color:var(--muted);font-size:13px}
+
+    .items{margin-top:14px}
+    .item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);}
+    .thumb{width:64px;height:64px;border-radius:8px;background:linear-gradient(180deg,#0a1b2b,#081323);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+    .item .title{font-weight:600}
+    .item .sub{font-size:13px;color:var(--muted)}
+
+    .summary{padding:18px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .total{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:18px}
+
+    .actions{display:flex;gap:10px;margin-top:18px}
+    .btn{padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#06a06f);color:#02120d}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .note{margin-top:12px;color:var(--muted);font-size:13px}
+    .links{margin-top:16px;border-top:1px dashed rgba(255,255,255,0.03);padding-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+    a.inline{color:#bfeecd;text-decoration:none;font-weight:600}
+
+    /* small helper */
+    .meta{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" role="main">
+      <div class="header">
+        <div class="check" aria-hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div>
+          <h1>Pagamento confirmado — Obrigado pela compra!</h1>
+          <p class="lead">Sua transação foi processada com sucesso. A seguir estão os detalhes do pedido.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <div class="order-info">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="meta">Pedido</div>
+                <div id="orderId" style="font-weight:700">#000000</div>
+              </div>
+              <div style="text-align:right">
+                <div class="meta">Total pago</div>
+                <div id="orderTotal" style="font-weight:700">R$ 0,00</div>
+              </div>
+            </div>
+
+            <div class="order-row" style="margin-top:12px">
+              <div>
+                <div class="muted">Status</div>
+                <div style="font-weight:700;color:var(--accent)">Concluído</div>
+              </div>
+              <div style="text-align:right">
+                <div class="muted">Forma de pagamento</div>
+                <div id="paymentMethod">Cartão de crédito</div>
+              </div>
+            </div>
+
+            <div class="order-row">
+              <div>
+                <div class="muted">Nome</div>
+                <div id="customerName">Cliente</div>
+              </div>
+              <div style="text-align:right">
+                <div class="muted">Email</div>
+                <div id="customerEmail">email@exemplo.com</div>
+              </div>
+            </div>
+
+            <div class="items" id="itemsList">
+              <!-- itens serão injetados aqui -->
+            </div>
+
+            <div class="links">
+              <a class="inline" href="#" id="downloadInvoice">Baixar comprovante (PDF)</a>
+              <a class="inline" href="#" id="viewOrder">Ver detalhes do pedido</a>
+            </div>
+          </div>
+
+          <div class="note">Se precisar de ajuda, responda este e‑mail ou contate nosso suporte.</div>
+        </div>
+
+        <aside>
+          <div class="summary">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="muted">Resumo</div>
+              <div class="muted" id="date">—</div>
+            </div>
+
+            <div style="margin-top:12px">
+              <div class="order-row"><div class="muted">Subtotal</div><div id="subtotal">R$ 0,00</div></div>
+              <div class="order-row"><div class="muted">Frete</div><div id="shipping">R$ 0,00</div></div>
+              <div class="order-row"><div class="muted">Descontos</div><div id="discount">R$ 0,00</div></div>
+              <div style="height:8px"></div>
+              <div class="total"><div>Total pago</div><div id="totalPaid">R$ 0,00</div></div>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn-primary" id="continueBtn">Continuar comprando</button>
+              <button class="btn btn-outline" id="receiptBtn">Imprimir recibo</button>
+            </div>
+
+            <div class="muted" style="margin-top:10px">Número do pedido e detalhes foram enviados por e‑mail.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Helper para formatar moeda BRL
+    function formatBRL(v){
+      return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v);
+    }
+
+    // Ler query params para facilitar integração rápida (ex: ?orderId=123&total=99.9&name=Joao)
+    function getParams(){
+      const p = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+      return p;
+    }
+
+    function parseItems(q){
+      // items pode ser enviado como base64 de JSON ou como JSON simples
+      if(!q) return [];
+      try{
+        // detecta base64 (apenas por segurança: contém apenas base64 chars)
+        if(/^[A-Za-z0-9+/=]+$/.test(q) && q.length>20){
+          const json = atob(q);
+          return JSON.parse(json);
+        }
+        return JSON.parse(q);
+      }catch(e){
+        return [];
+      }
+    }
+
+    function render(items, data){
+      const itemsList = document.getElementById('itemsList');
+      itemsList.innerHTML = '';
+      if(items.length===0){
+        itemsList.innerHTML = '<div class="muted" style="padding:12px">Sem itens listados — os detalhes do pedido foram enviados por e‑mail.</div>';
+      } else {
+        items.forEach(it => {
+          const div = document.createElement('div'); div.className='item';
+          div.innerHTML = `
+            <div class="thumb">${it.code?it.code:''}</div>
+            <div style="flex:1">
+              <div class="title">${it.name||'Produto'}</div>
+              <div class="sub">Quantidade: ${it.quantity||1} · ${formatBRL(Number(it.price||0))}</div>
+            </div>
+            <div style="font-weight:700">${formatBRL(Number((it.price||0)*(it.quantity||1)))}</div>
+          `;
+          itemsList.appendChild(div);
+        })
+      }
+
+      document.getElementById('orderId').textContent = data.orderId || '#000000';
+      document.getElementById('orderTotal').textContent = formatBRL(Number(data.total||0));
+      document.getElementById('totalPaid').textContent = formatBRL(Number(data.total||0));
+      document.getElementById('subtotal').textContent = formatBRL(Number(data.subtotal||data.total||0));
+      document.getElementById('shipping').textContent = formatBRL(Number(data.shipping||0));
+      document.getElementById('discount').textContent = formatBRL(Number(data.discount||0));
+      document.getElementById('paymentMethod').textContent = data.method||'Cartão de crédito';
+      document.getElementById('customerName').textContent = data.name||'Cliente';
+      document.getElementById('customerEmail').textContent = data.email||'email@exemplo.com';
+      document.getElementById('date').textContent = data.date || new Date().toLocaleString('pt-BR');
+
+      // links
+      document.getElementById('viewOrder').href = data.viewUrl || '#';
+      document.getElementById('downloadInvoice').href = data.invoiceUrl || '#';
+
+      // ações
+      document.getElementById('continueBtn').addEventListener('click',()=>{
+        window.location.href = data.continueUrl || '/';
+      });
+      document.getElementById('receiptBtn').addEventListener('click',()=>{
+        window.print();
+      });
+    }
+
+    // Inicialização: tenta ler parâmetros
+    (function(){
+      const p = getParams();
+      const items = parseItems(p.items || p.itens || '');
+      const data = {
+        orderId: p.orderId || p.pedido || ('#'+Math.floor(Math.random()*900000+100000)),
+        total: p.total || p.valor || 0,
+        subtotal: p.subtotal || p.total || 0,
+        shipping: p.shipping || p.frete || 0,
+        discount: p.discount || p.desconto || 0,
+        method: p.method || p.pagamento || 'Cartão de crédito',
+        name: p.name || p.cliente || '',
+        email: p.email || p.mail || '',
+        date: p.date || new Date().toLocaleString('pt-BR'),
+        viewUrl: p.viewUrl || '#',
+        invoiceUrl: p.invoiceUrl || '#',
+        continueUrl: p.continueUrl || '/'
+      };
+      render(items, data);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Impressoras</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+nav .carrinho-btn { cursor:pointer; background:#1e90ff; padding:5px 10px; border-radius:5px; }
+nav .carrinho-btn:hover { background:#0a65c0; }
+.search-bar { display:flex; justify-content:center; padding:15px; background:#f1f1f1; }
+.search-bar input { width:50%; padding:10px; border:1px solid #ccc; border-radius:5px 0 0 5px; outline:none; }
+.search-bar button { padding:10px 20px; border:none; background:#1e90ff; color:#fff; border-radius:0 5px 5px 0; cursor:pointer; font-weight:bold; }
+.search-bar button:hover { background:#0a65c0; }
+.banner { width:100%; display:block; margin-bottom:20px; }
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { text-align:center; margin-bottom:20px; }
+.produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+.produto { background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:15px; text-align:center; transition:0.3s; }
+.produto:hover { transform:translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.produto img { max-width:100%; height:150px; object-fit:contain; margin-bottom:10px; }
+.produto h3 { font-size:16px; margin-bottom:8px; }
+.produto p { font-size:14px; margin-bottom:8px; }
+.preco { font-size:16px; font-weight:bold; color:#1e90ff; margin-bottom:12px; }
+.btn { display:inline-block; background:#1e90ff; color:white; padding:10px 15px; border-radius:5px; text-decoration:none; cursor:pointer; }
+.btn:hover { background:#0a65c0; }
+#carrinho { position:fixed; top:70px; right:20px; width:280px; max-height:400px; overflow-y:auto; background:white; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.3); padding:10px; display:none; z-index:1000; }
+#carrinho h3 { margin-top:0; text-align:center; }
+#carrinho p { margin:5px 0; }
+#checkout-btn { display:block; width:100%; text-align:center; background:#1e90ff; color:white; padding:10px; border-radius:5px; margin-top:10px; text-decoration:none; }
+#checkout-btn:hover { background:#0a65c0; }
+</style>
+</head>
+<body>
+<header>
+<img src="img/logo.png" alt="World Tech Logo">
+</header>
+
+<nav>
+<a href="world-itens%20tecnologicos.html">Telefones</a>
+<a href="fones-de-ouvido-html.html">Fones de Ouvido</a>
+<a href="impressora-html.html">Impressoras</a>
+<a href="computadores-html.html">Computadores</a>
+<a href="escritorio-html.html">Escritório</a>
+<a href="acessorios-html.html">Acessórios</a>
+<a href="games-console.html">games&console</a>
+<a href="carrinho.html" class="carrinho-btn">Carrinho 🛒</a>
+</nav>
+
+<!-- Barra de busca funcional -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+  <button id="searchBtn">Pesquisar</button>
+</div>
+<style>
+/* Estilo da barra de busca */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f1f1f1;
+  gap: 10px;
+}
+
+.search-bar input {
+  flex: 1 1 300px;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  min-width: 150px;
+}
+
+.search-bar button {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border: none;
+  background: #1e90ff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-bar button:hover {
+  background: #0a65c0;
+}
+</style>
+
+<script>
+// Função para filtrar produtos
+function filtrarProdutos() {
+  const searchValue = document.getElementById('searchInput').value.toLowerCase();
+  const produtos = document.querySelectorAll('.produto');
+
+  produtos.forEach(produto => {
+    const nome = produto.querySelector('h3').innerText.toLowerCase();
+    if(nome.includes(searchValue) || searchValue === "") {
+      produto.style.display = 'block';
+    } else {
+      produto.style.display = 'none';
+    }
+  });
+}
+
+// Executa ao clicar no botão
+document.getElementById('searchBtn').addEventListener('click', filtrarProdutos);
+
+// Executa ao pressionar Enter no campo de busca
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if(e.key === 'Enter') {
+    e.preventDefault();
+    filtrarProdutos();
+  }
+});
+</script>
+
+
+<section>
+<img src="img/banner.png" class="banner" alt="Promoção World Tech">
+</section>
+
+<div class="container">
+<h2>Impressoras</h2>
+<div class="produtos">
+
+<!-- 1 -->
+<div class="produto"><img src="img/hp-deskjet-2720.png" alt="HP DeskJet 2720" onclick="abrirModal('img/hp-deskjet-2720.png','HP DeskJet 2720')"><h3>HP DeskJet 2720</h3><p>Impressora jato de tinta - Multifunção</p><div class="preco">R$ 349,00</div><a class="btn" onclick="verProduto('HP DeskJet 2720','R$ 349,00','Impressora jato de tinta - Multifunção','img/hp-deskjet-2720.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 2 -->
+<div class="produto"><img src="img/canon-pixma-mg2540s.png" alt="Canon Pixma MG2540S" onclick="abrirModal('img/canon-pixma-mg2540s.png','Canon Pixma MG2540S')"><h3>Canon Pixma MG2540S</h3><p>Impressora jato de tinta - Multifunção</p><div class="preco">R$ 369,00</div><a class="btn" onclick="verProduto('Canon Pixma MG2540S','R$ 369,00','Impressora jato de tinta - Multifunção','img/canon-pixma-mg2540s.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 3 -->
+<div class="produto"><img src="img/epson-l120.png" alt="Epson L120" onclick="abrirModal('img/epson-l120.png','Epson L120')"><h3>Epson L120</h3><p>Jato de tinta - Tanque de tinta</p><div class="preco">R$ 399,00</div><a class="btn" onclick="verProduto('Epson L120','R$ 399,00','Jato de tinta - Tanque de tinta','img/epson-l120.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 4 -->
+<div class="produto"><img src="img/brother-dcp-1610w.png" alt="Brother DCP-1610W" onclick="abrirModal('img/brother-dcp-1610w.png','Brother DCP-1610W')"><h3>Brother DCP-1610W</h3><p>Laser monocromática - Multifunção</p><div class="preco">R$ 499,00</div><a class="btn" onclick="verProduto('Brother DCP-1610W','R$ 499,00','Laser monocromática - Multifunção','img/brother-dcp-1610w.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 5 -->
+<div class="produto"><img src="img/hp-ink-tank-115.png" alt="HP Ink Tank 115" onclick="abrirModal('img/hp-ink-tank-115.png','HP Ink Tank 115')"><h3>HP Ink Tank 115</h3><p>Tanque de tinta - Multifunção</p><div class="preco">R$ 549,00</div><a class="btn" onclick="verProduto('HP Ink Tank 115','R$ 549,00','Tanque de tinta - Multifunção','img/hp-ink-tank-115.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 6 -->
+<div class="produto"><img src="img/canon-pixma-g3110.png" alt="Canon Pixma G3110" onclick="abrirModal('img/canon-pixma-g3110.png','Canon Pixma G3110')"><h3>Canon Pixma G3110</h3><p>Tanque de tinta - Multifunção</p><div class="preco">R$ 599,00</div><a class="btn" onclick="verProduto('Canon Pixma G3110','R$ 599,00','Tanque de tinta - Multifunção','img/canon-pixma-g3110.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 7 -->
+<div class="produto"><img src="img/epson-l3150.png" alt="Epson L3150" onclick="abrirModal('img/epson-l3150.png','Epson L3150')"><h3>Epson L3150</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 649,00</div><a class="btn" onclick="verProduto('Epson L3150','R$ 649,00','Tanque de tinta - Wi-Fi','img/epson-l3150.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 8 -->
+<div class="produto"><img src="img/brother-dcp-t420w.png" alt="Brother DCP-T420W" onclick="abrirModal('img/brother-dcp-t420w.png','Brother DCP-T420W')"><h3>Brother DCP-T420W</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 699,00</div><a class="btn" onclick="verProduto('Brother DCP-T420W','R$ 699,00','Tanque de tinta - Wi-Fi','img/brother-dcp-t420w.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 9 -->
+<div class="produto"><img src="img/hp-deskjet-4150.png" alt="HP DeskJet 4150" onclick="abrirModal('img/hp-deskjet-4150.png','HP DeskJet 4150')"><h3>HP DeskJet 4150</h3><p>Jato de tinta - Multifunção</p><div class="preco">R$ 749,00</div><a class="btn" onclick="verProduto('HP DeskJet 4150','R$ 749,00','Jato de tinta - Multifunção','img/hp-deskjet-4150.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 10 -->
+<div class="produto"><img src="img/canon-pixma-g4110.png" alt="Canon Pixma G4110" onclick="abrirModal('img/canon-pixma-g4110.png','Canon Pixma G4110')"><h3>Canon Pixma G4110</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 799,00</div><a class="btn" onclick="verProduto('Canon Pixma G4110','R$ 799,00','Tanque de tinta - Wi-Fi','img/canon-pixma-g4110.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 11 -->
+<div class="produto"><img src="img/epson-l5190.png" alt="Epson L5190" onclick="abrirModal('img/epson-l5190.png','Epson L5190')"><h3>Epson L5190</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 849,00</div><a class="btn" onclick="verProduto('Epson L5190','R$ 849,00','Tanque de tinta - Wi-Fi','img/epson-l5190.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 12 -->
+<div class="produto"><img src="img/brother-dcp-t620w.png" alt="Brother DCP-T520W" onclick="abrirModal('img/brother-dcp-t620w.png','Brother DCP-T620W')"><h3>Brother DCP-T520W</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 899,00</div><a class="btn" onclick="verProduto('Brother DCP-T520W','R$ 899,00','Tanque de tinta - Wi-Fi','img/brother-dcp-t520w.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 13 -->
+<div class="produto"><img src="img/hp-ink-tank-419.png" alt="HP Ink Tank 419" onclick="abrirModal('img/hp-ink-tank-419.png','HP Ink Tank 419')"><h3>HP Ink Tank 419</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 949,00</div><a class="btn" onclick="verProduto('HP Ink Tank 419','R$ 949,00','Tanque de tinta - Wi-Fi','img/hp-ink-tank-419.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 14 -->
+<div class="produto"><img src="img/canon-pixma-g6110.png" alt="Canon Pixma G6110" onclick="abrirModal('img/canon-pixma-g6110.png','Canon Pixma G6110')"><h3>Canon Pixma G6110</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 999,00</div><a class="btn" onclick="verProduto('Canon Pixma G6110','R$ 999,00','Tanque de tinta - Wi-Fi','img/canon-pixma-g6110.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 15 -->
+<div class="produto"><img src="img/epson-l6160.png" alt="Epson L6160" onclick="abrirModal('img/epson-l6160.png','Epson L6160')"><h3>Epson L6160</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.099,00</div><a class="btn" onclick="verProduto('Epson L6160','R$ 1.099,00','Tanque de tinta - Wi-Fi','img/epson-l6160.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 16 -->
+<div class="produto"><img src="img/brother-mfc-j497dw.png" alt="Brother MFC-J497DW" onclick="abrirModal('img/brother-mfc-j497dw.png','Brother MFC-J497DW')"><h3>Brother MFC-J497DW</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.149,00</div><a class="btn" onclick="verProduto('Brother MFC-J497DW','R$ 1.149,00','Tanque de tinta - Wi-Fi','img/brother-mfc-j497dw.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 17 -->
+<div class="produto"><img src="img/hp-ink-tank-419-all-in-one.png" alt="HP Ink Tank 419 All-in-One" onclick="abrirModal('img/hp-ink-tank-419-all-in-one.png','HP Ink Tank 419 All-in-One')"><h3>HP Ink Tank 419 All-in-One</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.199,00</div><a class="btn" onclick="verProduto('HP Ink Tank 419 All-in-One','R$ 1.199,00','Tanque de tinta - Wi-Fi','img/hp-ink-tank-419-all-in-one.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 18 -->
+<div class="produto"><img src="img/canon-pixma-g7110.png" alt="Canon Pixma G7110" onclick="abrirModal('img/canon-pixma-g7110.png','Canon Pixma G7110')"><h3>Canon Pixma G7110</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.249,00</div><a class="btn" onclick="verProduto('Canon Pixma G7110','R$ 1.249,00','Tanque de tinta - Wi-Fi','img/canon-pixma-g7110.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 19 -->
+<div class="produto"><img src="img/epson-l6190.png" alt="Epson L6190" onclick="abrirModal('img/epson-l6190.png','Epson L6190')"><h3>Epson L6190</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.299,00</div><a class="btn" onclick="verProduto('Epson L6190','R$ 1.299,00','Tanque de tinta - Wi-Fi','img/epson-l6190.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 20 -->
+<div class="produto"><img src="img/brother-mfc-j497dw-all-in-one.png" alt="Brother MFC-J497DW All-in-One" onclick="abrirModal('img/brother-mfc-j497dw-all-in-one.png','Brother MFC-J497DW All-in-One')"><h3>Brother MFC-J497DW All-in-One</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.399,00</div><a class="btn" onclick="verProduto('Brother MFC-J497DW All-in-One','R$ 1.399,00','Tanque de tinta - Wi-Fi','img/brother-mfc-j497dw-all-in-one.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 21 -->
+<div class="produto"><img src="img/hp-laserjet-pro-m15w.png" alt="HP LaserJet Pro M15w" onclick="abrirModal('img/hp-laserjet-pro-m15w.png','HP LaserJet Pro M15w')"><h3>HP LaserJet Pro M15w</h3><p>Laser monocromática - Wi-Fi</p><div class="preco">R$ 1.499,00</div><a class="btn" onclick="verProduto('HP LaserJet Pro M15w','R$ 1.499,00','Laser monocromática - Wi-Fi','img/hp-laserjet-pro-m15w.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 23 -->
+<div class="produto"><img src="img/epson-l6195.png" alt="Epson L6195" onclick="abrirModal('img/epson-l6195.png','Epson L6195')"><h3>Epson L6195</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.599,00</div><a class="btn" onclick="verProduto('Epson L6195','R$ 1.599,00','Tanque de tinta - Wi-Fi','img/epson-l6195.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 24 -->
+<div class="produto"><img src="img/brother-mfc-j497dw-pro.png" alt="Brother MFC-J497DW Pro" onclick="abrirModal('img/brother-mfc-j497dw-pro.png','Brother MFC-J497DW Pro')"><h3>Brother MFC-J497DW Pro</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.699,00</div><a class="btn" onclick="verProduto('Brother MFC-J497DW Pro','R$ 1.699,00','Tanque de tinta - Wi-Fi','img/brother-mfc-j497dw-pro.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 25 -->
+<div class="produto"><img src="img/hp-laserjet-pro-m28w.png" alt="HP LaserJet Pro M28w" onclick="abrirModal('img/hp-laserjet-pro-m28w.png','HP LaserJet Pro M28w')"><h3>HP LaserJet Pro M28w</h3><p>Laser monocromática - Wi-Fi</p><div class="preco">R$ 1.799,00</div><a class="btn" onclick="verProduto('HP LaserJet Pro M28w','R$ 1.799,00','Laser monocromática - Wi-Fi','img/hp-laserjet-pro-m28w.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 26 -->
+<div class="produto"><img src="img/canon-pixma-g8210.png" alt="Canon Pixma G8210" onclick="abrirModal('img/canon-pixma-g8210.png','Canon Pixma G8210')"><h3>Canon Pixma G8210</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 1.899,00</div><a class="btn" onclick="verProduto('Canon Pixma G8210','R$ 1.899,00','Tanque de tinta - Wi-Fi','img/canon-pixma-g8210.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 27 -->
+<div class="produto"><img src="img/epson-l14150.png" alt="Epson L14150" onclick="abrirModal('img/epson-l14150.png','Epson L14150')"><h3>Epson L14150</h3><p>Tanque de tinta - A3 - Wi-Fi</p><div class="preco">R$ 1.999,00</div><a class="btn" onclick="verProduto('Epson L14150','R$ 1.999,00','Tanque de tinta - A3 - Wi-Fi','img/epson-l14150.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 28 -->
+<div class="produto"><img src="img/brother-mfc-j6930dw.png" alt="Brother MFC-J6930DW" onclick="abrirModal('img/brother-mfc-j6930dw.png','Brother MFC-J6930DW')"><h3>Brother MFC-J6930DW</h3><p>Tanque de tinta - A3 - Wi-Fi</p><div class="preco">R$ 2.199,00</div><a class="btn" onclick="verProduto('Brother MFC-J6930DW','R$ 2.199,00','Tanque de tinta - A3 - Wi-Fi','img/brother-mfc-j6930dw.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 29 -->
+<div class="produto"><img src="img/hp-laserjet-pro-m404dn.png" alt="HP LaserJet Pro M404dn" onclick="abrirModal('img/hp-laserjet-pro-m404dn.png','HP LaserJet Pro M404dn')"><h3>HP LaserJet Pro M404dn</h3><p>Laser monocromática - Duplex</p><div class="preco">R$ 2.299,00</div><a class="btn" onclick="verProduto('HP LaserJet Pro M404dn','R$ 2.299,00','Laser monocromática - Duplex','img/hp-laserjet-pro-m404dn.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 30 -->
+<div class="produto"><img src="img/canon-pixma-g6210.png" alt="Canon Pixma G6210" onclick="abrirModal('img/canon-pixma-g6210.png','Canon Pixma G6210')"><h3>Canon Pixma G6210</h3><p>Tanque de tinta - Wi-Fi</p><div class="preco">R$ 2.399,00</div><a class="btn" onclick="verProduto('Canon Pixma G6210','R$ 2.399,00','Tanque de tinta - Wi-Fi','img/canon-pixma-g6210.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 31 -->
+<div class="produto"><img src="img/epson-l1455.png" alt="Epson L1455" onclick="abrirModal('img/epson-l1455.png','Epson L1455')"><h3>Epson L1455</h3><p>Tanque de tinta - A3 - Wi-Fi</p><div class="preco">R$ 2.499,00</div><a class="btn" onclick="verProduto('Epson L1455','R$ 2.499,00','Tanque de tinta - A3 - Wi-Fi','img/epson-l1455.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 32 -->
+<div class="produto"><img src="img/brother-mfc-j6945dw.png" alt="Brother MFC-J6945DW" onclick="abrirModal('img/brother-mfc-j6945dw.png','Brother MFC-J6945DW')"><h3>Brother MFC-J6945DW</h3><p>Tanque de tinta - A3 - Duplex</p><div class="preco">R$ 2.599,00</div><a class="btn" onclick="verProduto('Brother MFC-J6945DW','R$ 2.599,00','Tanque de tinta - A3 - Duplex','img/brother-mfc-j6945dw.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 33 -->
+<div class="produto"><img src="img/hp-laserjet-enterprise-m607dn.png" alt="HP LaserJet Enterprise M607dn" onclick="abrirModal('img/hp-laserjet-enterprise-m607dn.png','HP LaserJet Enterprise M607dn')"><h3>HP LaserJet Enterprise M607dn</h3><p>Laser monocromática - Alta produtividade</p><div class="preco">R$ 2.799,00</div><a class="btn" onclick="verProduto('HP LaserJet Enterprise M607dn','R$ 2.799,00','Laser monocromática - Alta produtividade','img/hp-laserjet-enterprise-m607dn.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 34 -->
+<div class="produto"><img src="img/canon-imageclass-lbp623cdw.png" alt="Canon ImageClass LBP623CDW" onclick="abrirModal('img/canon-imageclass-lbp623cdw.png','Canon ImageClass LBP623CDW')"><h3>Canon ImageClass LBP623CDW</h3><p>Laser colorida - Wi-Fi</p><div class="preco">R$ 2.899,00</div><a class="btn" onclick="verProduto('Canon ImageClass LBP623CDW','R$ 2.899,00','Laser colorida - Wi-Fi','img/canon-imageclass-lbp623cdw.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 35 -->
+<div class="produto"><img src="img/epson-eco-tank-l15150.png" alt="Epson EcoTank L15150" onclick="abrirModal('img/epson-eco-tank-l15150.png','Epson EcoTank L15150')"><h3>Epson EcoTank L15150</h3><p>Tanque de tinta - A3 - Profissional</p><div class="preco">R$ 2.999,00</div><a class="btn" onclick="verProduto('Epson EcoTank L15150','R$ 2.999,00','Tanque de tinta - A3 - Profissional','img/epson-eco-tank-l15150.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 36 -->
+<div class="produto"><img src="img/brother-hl-l8360cdw.png" alt="Brother HL-L8360CDW" onclick="abrirModal('img/brother-hl-l8360cdw.png','Brother HL-L8360CDW')"><h3>Brother HL-L8360CDW</h3><p>Laser colorida - Alta produtividade</p><div class="preco">R$ 3.199,00</div><a class="btn" onclick="verProduto('Brother HL-L8360CDW','R$ 3.199,00','Laser colorida - Alta produtividade','img/brother-hl-l8360cdw.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 37 -->
+<div class="produto"><img src="img/hp-color-laserjet-pro-m454dn.png" alt="HP Color LaserJet Pro M454dn" onclick="abrirModal('img/hp-color-laserjet-pro-m454dn.png','HP Color LaserJet Pro M454dn')"><h3>HP Color LaserJet Pro M454dn</h3><p>Laser colorida - Duplex</p><div class="preco">R$ 3.399,00</div><a class="btn" onclick="verProduto('HP Color LaserJet Pro M454dn','R$ 3.399,00','Laser colorida - Duplex','img/hp-color-laserjet-pro-m454dn.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 38 -->
+<div class="produto"><img src="img/canon-imageclass-lbp7110cw.png" alt="Canon ImageClass LBP7110CW" onclick="abrirModal('img/canon-imageclass-lbp7110cw.png','Canon ImageClass LBP7110CW')"><h3>Canon ImageClass LBP7110CW</h3><p>Laser colorida - Alta produtividade</p><div class="preco">R$ 3.499,00</div><a class="btn" onclick="verProduto('Canon ImageClass LBP7110CW','R$ 3.499,00','Laser colorida - Alta produtividade','img/canon-imageclass-lbp7110cw.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 39 -->
+<div class="produto"><img src="img/epson-eco-tank-l15160.png" alt="Epson EcoTank L15160" onclick="abrirModal('img/epson-eco-tank-l15160.png','Epson EcoTank L15160')"><h3>Epson EcoTank L15160</h3><p>Tanque de tinta - A3 - Profissional Wi-Fi</p><div class="preco">R$ 3.599,00</div><a class="btn" onclick="verProduto('Epson EcoTank L15160','R$ 3.599,00','Tanque de tinta - A3 - Profissional Wi-Fi','img/epson-eco-tank-l15160.png')"href="produtos.html">Comprar</a></div>
+
+<!-- 40 -->
+<div class="produto"><img src="img/brother-hl-l9310cdw.png" alt="Brother HL-L9310CDW" onclick="abrirModal('img/brother-hl-l9310cdw.png','Brother HL-L9310CDW')"><h3>Brother HL-L9310CDW</h3><p>Laser colorida - Alta produtividade - Duplex</p><div class="preco">R$ 3.799,00</div><a class="btn" onclick="verProduto('Brother HL-L9310CDW','R$ 3.799,00','Laser colorida - Alta produtividade - Duplex','img/brother-hl-l9310cdw.png')"href="produtos.html">Comprar</a></div>
+
+</div>
+
+</div>
+</div>
+<script>
+function verProduto(nome, imagens, descricao, preco){
+    localStorage.setItem('produtoSelecionado', JSON.stringify({
+        nome: nome,
+        imagens: imagens,   // Array de imagens
+        descricao: descricao,
+        preco: preco
+    }));
+    window.location.href = 'produto.html';
+}
+
+</script>
+
+<!-- CARRINHO SIMPLES -->
+<div id="carrinho">
+  <h3>Carrinho</h3>
+  <p>Vazio</p>
+  <a href="produtos.html" class="checkout-btn">Ir para o Carrinho 🛒</a>
+</div>
+
+<style>
+.checkout-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #007bff; /* azul */
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.checkout-btn:hover { 
+  background: #0056b3; 
+}
+</style>
+
+<script>
+// Carrinho básico sem alerta/modal
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function salvarCarrinho(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function adicionarAoCarrinho(nome, preco){
+  carrinho.push({nome, preco});
+  salvarCarrinho();
+}
+</script>

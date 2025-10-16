@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Carrinho</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { text-align:center; margin-bottom:20px; }
+
+#carrinho { background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:800px; margin:auto; }
+.item-carrinho { display:flex; align-items:center; gap:15px; border-bottom:1px solid #ddd; padding:10px 0; }
+.item-carrinho img { width:80px; height:80px; object-fit:contain; border-radius:5px; }
+.item-info { flex:1; }
+.item-info h3 { margin:0 0 5px 0; font-size:16px; }
+.item-info .preco { font-weight:bold; color:#1e90ff; margin:0; }
+.remove-btn { background:#ff4d4f; color:#fff; border:none; border-radius:5px; padding:5px 10px; cursor:pointer; }
+.remove-btn:hover { background:#d9363e; }
+.total { text-align:right; font-size:18px; font-weight:bold; margin-top:10px; }
+.checkout-btn { display:block; width:100%; text-align:center; background:#1e90ff; color:white; padding:12px; border-radius:5px; margin-top:20px; text-decoration:none; font-weight:bold; }
+.checkout-btn:hover { background:#0a65c0; }
+.empty-msg { text-align:center; font-size:18px; padding:50px 0; color:#555; }
+</style>
+</head>
+<body>
+
+<header>
+<img src="img/logo.png" alt="World Tech Logo">
+</header>
+
+<nav>
+<a href="world-itens%20tecnologicos.html">Telefones</a>
+<a href="fones-de-ouvido-html.html">Fones de Ouvido</a>
+<a href="impressora-html.html">Impressoras</a>
+<a href="computadores-html.html">Computadores</a>
+<a href="escritorio-html.html">Escritório</a>
+<a href="acessorios-html.html">Acessórios</a>
+<a href="games-console.html">Games & Console</a>
+</nav>
+
+<div class="container">
+<h2>Seu Carrinho</h2>
+<div id="carrinho"></div>
+</div>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function salvarCarrinho(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function parsePrice(precoStr){
+  if(!precoStr) return 0;
+  let s = String(precoStr).trim().replace(/[^\d\.,-]/g,'');
+  s = s.replace(/\./g,'').replace(/,/g,'.');
+  const n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+}
+
+function atualizarCarrinhoVisual(){
+  const div = document.getElementById('carrinho');
+  if(!div) return;
+
+  div.innerHTML = '';
+  if(carrinho.length === 0){
+    div.innerHTML = '<p class="empty-msg">Seu carrinho está vazio.</p>';
+    return;
+  }
+
+  let total = 0;
+  carrinho.forEach((item,index)=>{
+    let valor = parsePrice(item.preco);
+    total += valor;
+
+    let itemHTML = document.createElement('div');
+    itemHTML.className = 'item-carrinho';
+    itemHTML.innerHTML = `
+      <img src="${item.img}" alt="${item.nome}">
+      <div class="item-info">
+        <h3>${item.nome}</h3>
+        <p class="preco">${item.preco}</p>
+      </div>
+      <button class="remove-btn" onclick="removerDoCarrinho(${index})">Remover</button>
+    `;
+    div.appendChild(itemHTML);
+  });
+
+  let totalDiv = document.createElement('div');
+  totalDiv.className = 'total';
+  totalDiv.textContent = `Total: R$ ${total.toFixed(2).replace('.',',')}`;
+  div.appendChild(totalDiv);
+
+  let checkout = document.createElement('a');
+  checkout.href = 'checkout.html';
+  checkout.className = 'checkout-btn';
+  checkout.textContent = 'Finalizar Compra';
+  div.appendChild(checkout);
+}
+
+function removerDoCarrinho(index){
+  carrinho.splice(index,1);
+  salvarCarrinho();
+  atualizarCarrinhoVisual();
+}
+
+document.addEventListener('DOMContentLoaded', atualizarCarrinhoVisual);
+</script>
+
+</body>
+</html>

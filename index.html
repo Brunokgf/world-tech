@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Cadastro - Minha Loja</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+    header { background: #222; color: #fff; padding: 15px; text-align: center; }
+    header img { max-height: 50px; vertical-align: middle; }
+    nav { background: #444; padding: 10px; text-align: center; }
+    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    .banner { width: 100%; height: 200px; background: url('banner.jpg') center/cover no-repeat; margin-bottom: 20px; }
+    .container { max-width: 400px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h1 { text-align: center; margin-bottom: 20px; }
+    form { display: flex; flex-direction: column; }
+    input { padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; }
+    button { padding: 12px; border: none; border-radius: 8px; background: #007bff; color: #fff; font-size: 16px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .toggle-link { text-align: center; margin-top: 10px; font-size: 14px; cursor: pointer; color: #007bff; }
+    .toggle-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Logo da Loja">
+  </header>
+
+  <div class="banner"></div>
+
+  <nav>
+    <a href="world-itens%20tecnologicos.html">Telefones</a>
+    <a href="fone-de-ouvido.html">Fones de Ouvido</a>
+    <a href="impressora.html">Impressoras</a>
+    <a href="computadores.html">Computadores</a>
+    <a href="escritorio.html">Escritório</a>
+    <a href="acessorio.html">Acessórios</a>
+    <a href="Games&consoles%20-%20Copia.html">games&console</a>
+  </nav>
+
+  <div class="container">
+    <h1 id="form-title">Login</h1>
+    
+    <form id="login-form">
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+
+    <form id="register-form" style="display:none;">
+      <input type="text" id="name" placeholder="Nome Completo" required>
+      <input type="email" id="reg-email" placeholder="E-mail" required>
+      <input type="password" id="reg-password" placeholder="Senha" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <div class="toggle-link" id="toggle-link">Não tem conta? Cadastre-se</div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const toggleLink = document.getElementById("toggle-link");
+    const formTitle = document.getElementById("form-title");
+
+    toggleLink.addEventListener("click", () => {
+      if(loginForm.style.display !== "none") {
+        loginForm.style.display = "none";
+        registerForm.style.display = "flex";
+        formTitle.textContent = "Cadastro";
+        toggleLink.textContent = "Já tem conta? Faça login";
+      } else {
+        loginForm.style.display = "flex";
+        registerForm.style.display = "none";
+        formTitle.textContent = "Login";
+        toggleLink.textContent = "Não tem conta? Cadastre-se";
+      }
+    });
+
+    // --- LOGIN ---
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value.trim();
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find(u => u.email.toLowerCase() === email && u.password === password);
+
+      if(user){
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
+        alert(`Bem-vindo, ${user.name}!`);
+        window.location.href = "world-itens%20tecnologicos.html"; // redireciona para a página desejada
+      } else {
+        alert("E-mail ou senha incorretos.");
+      }
+    });
+
+    // --- CADASTRO ---
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("reg-email").value.trim().toLowerCase();
+      const password = document.getElementById("reg-password").value.trim();
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      if(users.find(u => u.email.toLowerCase() === email)) {
+        alert("E-mail já cadastrado.");
+        return;
+      }
+
+      const newUser = { name, email, password };
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+      localStorage.setItem("loggedInUser", JSON.stringify(newUser)); // entra automaticamente
+      alert(`Cadastro realizado com sucesso! Bem-vindo, ${name}!`);
+      window.location.href = "world-itens%20tecnologicos.html"; // redireciona para a página desejada
+    });
+  </script>
+
+</body>
+</html>

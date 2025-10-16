@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Tech - Games & Consoles</title>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f8f9fa; color:#333; }
+header { background:#000; color:#fff; text-align:center; padding:15px; }
+header img { max-height:80px; }
+nav { background:#222; display:flex; justify-content:center; gap:30px; padding:12px 0; }
+nav a { color:#fff; text-decoration:none; font-weight:bold; transition:0.3s; }
+nav a:hover { color:#1e90ff; }
+nav a.ativo { color:#1e90ff; }
+nav .carrinho-btn { cursor:pointer; background:#1e90ff; padding:5px 10px; border-radius:5px; }
+nav .carrinho-btn:hover { background:#0a65c0; }
+.search-bar { display:flex; justify-content:center; padding:15px; background:#f1f1f1; }
+.search-bar input { width:50%; padding:10px; border:1px solid #ccc; border-radius:5px 0 0 5px; outline:none; }
+.search-bar button { padding:10px 20px; border:none; background:#1e90ff; color:#fff; border-radius:0 5px 5px 0; cursor:pointer; font-weight:bold; }
+.search-bar button:hover { background:#0a65c0; }
+.banner { width:100%; display:block; margin-bottom:20px; }
+.container { max-width:1200px; margin:auto; padding:20px; }
+h2 { text-align:center; margin-bottom:20px; }
+.produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+.produto { background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:15px; text-align:center; transition:0.3s; }
+.produto:hover { transform:translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.produto img { max-width:100%; height:150px; object-fit:contain; margin-bottom:10px; }
+.produto h3 { font-size:16px; margin-bottom:8px; }
+.produto p { font-size:14px; margin-bottom:8px; }
+.preco { font-size:16px; font-weight:bold; color:#1e90ff; margin-bottom:12px; }
+.btn { display:inline-block; background:#1e90ff; color:white; padding:10px 15px; border-radius:5px; text-decoration:none; cursor:pointer; }
+.btn:hover { background:#0a65c0; }
+#carrinho { position:fixed; top:70px; right:20px; width:320px; max-height:420px; overflow-y:auto; background:white; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.3); padding:10px; display:none; z-index:1000; }
+#carrinho h3 { margin-top:0; text-align:center; }
+#carrinho p { margin:5px 0; }
+#carrinho .total { font-weight:bold; color:#1e90ff; text-align:right; margin-top:10px; }
+#carrinho .checkout-btn { display:block; margin-top:10px; padding:8px 12px; background:#007bff; color:#fff; text-align:center; border-radius:5px; text-decoration:none; }
+#carrinho .checkout-btn:hover { background:#007bff; }
+</style>
+</head>
+<body>
+<header>
+<img src="img/logo.png" alt="World Tech Logo">
+</header>
+
+<nav>
+<a href="world-itens%20tecnologicos.html">Telefones</a>
+<a href="fones-de-ouvido-html.html">Fones de Ouvido</a>
+<a href="impressora-html.html">Impressoras</a>
+<a href="computadores-html.html">Computadores</a>
+<a href="escritorio-html.html">Escritório</a>
+<a href="acessorios-html.html">Acessórios</a>
+<a href="games-console.html">games&console</a>
+<a href="#" class="carrinho-btn" onclick="toggleCarrinho()">Carrinho 🛒</a>
+</nav>
+
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+<button id="searchBtn">Pesquisar</button>
+</div>
+
+<section>
+<img src="img/banner-games.png" class="banner" alt="Promoção Games & Consoles">
+</section>
+
+<div class="container">
+<h2>Games & Consoles</h2>
+<div class="produtos">
+
+<!-- TODOS OS 40 PRODUTOS -->
+<!-- INÍCIO DOS PRODUTOS -->
+<div class="produto"><img src="img/game1.png" alt="Cabo HDMI 4K"><h3>Cabo HDMI 4K</h3><p>Acessório essencial</p><div class="preco">R$ 49,90</div><a class="btn" onclick="adicionarAoCarrinho('Cabo HDMI 4K','R$ 49,90')">Comprar</a></div>
+<div class="produto"><img src="img/game2.png" alt="Cabo USB-C Gaming"><h3>Cabo USB-C Gaming</h3><p>Carregamento rápido</p><div class="preco">R$ 59,90</div><a class="btn" onclick="adicionarAoCarrinho('Cabo USB-C Gaming','R$ 59,90')">Comprar</a></div>
+<div class="produto"><img src="img/game3.png" alt="Carregador DualShock"><h3>Carregador DualShock</h3><p>Base para 2 controles</p><div class="preco">R$ 79,90</div><a class="btn" onclick="adicionarAoCarrinho('Carregador DualShock','R$ 79,90')">Comprar</a></div>
+<div class="produto"><img src="img/game4.png" alt="Headset Gamer Básico"><h3>Headset Gamer Básico</h3><p>Som estéreo</p><div class="preco">R$ 99,90</div><a class="btn" onclick="adicionarAoCarrinho('Headset Gamer Básico','R$ 99,90')">Comprar</a></div>
+<div class="produto"><img src="img/game5.png" alt="Controle PS3"><h3>Controle PS3</h3><p>Clássico e confortável</p><div class="preco">R$ 119,90</div><a class="btn" onclick="adicionarAoCarrinho('Controle PS3','R$ 119,90')">Comprar</a></div>
+<div class="produto"><img src="img/game6.png" alt="Uncharted PS3"><h3>Uncharted PS3</h3><p>Exploração e ação</p><div class="preco">R$ 129,90</div><a class="btn" onclick="adicionarAoCarrinho('Uncharted PS3','R$ 129,90')">Comprar</a></div>
+<div class="produto"><img src="img/game7.png" alt="The Last of Us PS3"><h3>The Last of Us PS3</h3><p>Aventura dramática</p><div class="preco">R$ 149,90</div><a class="btn" onclick="adicionarAoCarrinho('The Last of Us PS3','R$ 149,90')">Comprar</a></div>
+<div class="produto"><img src="img/game8.png" alt="Mouse Gamer RGB"><h3>Mouse Gamer RGB</h3><p>Alta sensibilidade</p><div class="preco">R$ 149,90</div><a class="btn" onclick="adicionarAoCarrinho('Mouse Gamer RGB','R$ 149,90')">Comprar</a></div>
+<div class="produto"><img src="img/game9.png" alt="Jogo Resident Evil PS4"><h3>Resident Evil PS4</h3><p>Terror e suspense</p><div class="preco">R$ 249,90</div><a class="btn" onclick="adicionarAoCarrinho('Resident Evil PS4','R$ 249,90')">Comprar</a></div>
+<div class="produto"><img src="img/game10.png" alt="Controle Xbox"><h3>Controle Xbox</h3><p>Conforto e precisão</p><div class="preco">R$ 199,90</div><a class="btn" onclick="adicionarAoCarrinho('Controle Xbox','R$ 199,90')">Comprar</a></div>
+
+<div class="produto"><img src="img/game11.png" alt="Jogo FIFA 23 PS4"><h3>FIFA 23 PS4</h3><p>Última edição</p><div class="preco">R$ 179,90</div><a class="btn" onclick="adicionarAoCarrinho('FIFA 23 PS4','R$ 179,90')">Comprar</a></div>
+<div class="produto"><img src="img/game12.png" alt="Jogo NBA 2K23 PS5"><h3>NBA 2K23 PS5</h3><p>Basquete realista</p><div class="preco">R$ 199,90</div><a class="btn" onclick="adicionarAoCarrinho('NBA 2K23 PS5','R$ 199,90')">Comprar</a></div>
+<div class="produto"><img src="img/game13.png" alt="Mouse Gamer PS5"><h3>Mouse Gamer PS5</h3><p>Conforto e precisão</p><div class="preco">R$ 199,90</div><a class="btn" onclick="adicionarAoCarrinho('Mouse Gamer PS5','R$ 199,90')">Comprar</a></div>
+<div class="produto"><img src="img/game14.png" alt="Teclado Mecânico Gamer"><h3>Teclado Mecânico Gamer</h3><p>Teclas precisas</p><div class="preco">R$ 299,90</div><a class="btn" onclick="adicionarAoCarrinho('Teclado Mecânico Gamer','R$ 299,90')">Comprar</a></div>
+<div class="produto"><img src="img/game15.png" alt="Headset Gamer Wireless"><h3>Headset Gamer Wireless</h3><p>Sem fio, áudio limpo</p><div class="preco">R$ 349,90</div><a class="btn" onclick="adicionarAoCarrinho('Headset Gamer Wireless','R$ 349,90')">Comprar</a></div>
+<div class="produto"><img src="img/game16.png" alt="Headset Gamer PS5"><h3>Headset Gamer PS5</h3><p>Som envolvente</p><div class="preco">R$ 349,90</div><a class="btn" onclick="adicionarAoCarrinho('Headset Gamer PS5','R$ 349,90')">Comprar</a></div>
+<div class="produto"><img src="img/game17.png" alt="Jogo Spider-Man PS4"><h3>Spider-Man PS4</h3><p>Herói urbano</p><div class="preco">R$ 279,90</div><a class="btn" onclick="adicionarAoCarrinho('Spider-Man PS4','R$ 279,90')">Comprar</a></div>
+<div class="produto"><img src="img/game18.png" alt="Jogo Call of Duty PS4"><h3>Call of Duty PS4</h3><p>Ação intensa</p><div class="preco">R$ 299,90</div><a class="btn" onclick="adicionarAoCarrinho('Call of Duty PS4','R$ 299,90')">Comprar</a></div>
+<div class="produto"><img src="img/game19.png" alt="Volante Xbox Racing"><h3>Volante Xbox Racing</h3><p>Force Feedback</p><div class="preco">R$ 549,90</div><a class="btn" onclick="adicionarAoCarrinho('Volante Xbox Racing','R$ 549,90')">Comprar</a></div>
+<div class="produto"><img src="img/game20.png" alt="Jogo Assassin's Creed Valhalla PS5"><h3>Assassin's Creed Valhalla PS5</h3><p>Aventura histórica</p><div class="preco">R$ 499,90</div><a class="btn" onclick="adicionarAoCarrinho('Assassin\'s Creed Valhalla PS5','R$ 499,90')">Comprar</a></div>
+
+<div class="produto"><img src="img/game21.png" alt="Jogo Cyberpunk 2077 PS5"><h3>Cyberpunk 2077 PS5</h3><p>Mundo futurista</p><div class="preco">R$ 599,90</div><a class="btn" onclick="adicionarAoCarrinho('Cyberpunk 2077 PS5','R$ 599,90')">Comprar</a></div>
+<div class="produto"><img src="img/game22.png" alt="Console Xbox Series X"><h3>Console Xbox Series X</h3><p>Alta performance</p><div class="preco">R$ 4.299,90</div><a class="btn" onclick="adicionarAoCarrinho('Console Xbox Series X','R$ 4.299,90')">Comprar</a></div>
+<div class="produto"><img src="img/game23.png" alt="Console PS5"><h3>Console PS5</h3><p>Geração atual</p><div class="preco">R$ 4.499,90</div><a class="btn" onclick="adicionarAoCarrinho('Console PS5','R$ 4.499,90')">Comprar</a></div>
+<div class="produto"><img src="img/game24.png" alt="Console Xbox One S 500GB"><h3>Console Xbox One S 500GB</h3><p>Compacto e eficiente</p><div class="preco">R$ 1.299,90</div><a class="btn" onclick="adicionarAoCarrinho('Console Xbox One S 500GB','R$ 1.299,90')">Comprar</a></div>
+<div class="produto"><img src="img/game25.png" alt="Console Xbox One X 1TB"><h3>Console Xbox One X 1TB</h3><p>Gráficos 4K</p><div class="preco">R$ 1.799,90</div><a class="btn" onclick="adicionarAoCarrinho('Console Xbox One X 1TB','R$ 1.799,90')">Comprar</a></div>
+
+<div class="produto"><img src="img/game26.png" alt="Controle Xbox Series S"><h3>Controle Xbox Series S</h3><p>Conforto e precisão</p><div class="preco">R$ 199,90</div><a class="btn" onclick="adicionarAoCarrinho('Controle Xbox Series S','R$ 199,90')">Comprar</a></div>
+<div class="produto"><img src="img/game27.png" alt="Jogo GTA V PS5"><h3>GTA V PS5</h3><p>Mundo aberto</p><div class="preco">R$ 599,90</div><a class="btn" onclick="adicionarAoCarrinho('GTA V PS5','R$ 599,90')">Comprar</a></div>
+<div class="produto"><img src="img/game28.png" alt="Jogo God of War PS5"><h3>God of War PS5</h3><p>Aventura épica</p><div class="preco">R$ 649,90</div><a class="btn" onclick="adicionarAoCarrinho('God of War PS5','R$ 649,90')">Comprar</a></div>
+<div class="produto"><img src="img/game29.png" alt="Jogo Horizon Forbidden West PS5"><h3>Horizon Forbidden West PS5</h3><p>Mundo aberto e exploração</p><div class="preco">R$ 699,90</div><a class="btn" onclick="adicionarAoCarrinho('Horizon Forbidden West PS5','R$ 699,90')">Comprar</a></div>
+<div class="produto"><img src="img/game30.png" alt="Jogo Gran Turismo 7 PS5"><h3>Gran Turismo 7 PS5</h3><p>Simulação de corrida</p><div class="preco">R$ 749,90</div><a class="btn" onclick="adicionarAoCarrinho('Gran Turismo 7 PS5','R$ 749,90')">Comprar</a></div>
+
+<div class="produto"><img src="img/game31.png" alt="Volante PS5 Racing"><h3>Volante PS5 Racing</h3><p>Force Feedback avançado</p><div class="preco">R$ 899,90</div><a class="btn" onclick="adicionarAoCarrinho('Volante PS5 Racing','R$ 899,90')">Comprar</a></div>
+<div class="produto"><img src="img/game32.png" alt="Jogo Forza Horizon 5 Xbox"><h3>Forza Horizon 5 Xbox</h3><p>Mundo aberto</p><div class="preco">R$ 499,90</div><a class="btn" onclick="adicionarAoCarrinho('Forza Horizon 5 Xbox','R$ 499,90')">Comprar</a></div>
+<div class="produto"><img src="img/game33.png" alt="Jogo Minecraft PS5"><h3>Minecraft PS5</h3><p>Construção criativa</p><div class="preco">R$ 199,90</div><a class="btn" onclick="adicionarAoCarrinho('Minecraft PS5','R$ 199,90')">Comprar</a></div>
+<div class="produto"><img src="img/game34.png" alt="Jogo The Witcher 3 PS4"><h3>The Witcher 3 PS4</h3><p>Aventura épica</p><div class="preco">R$ 249,90</div><a class="btn" onclick="adicionarAoCarrinho('The Witcher 3 PS4','R$ 249,90')">Comprar</a></div>
+<div class="produto"><img src="img/game35.png" alt="Controle PS5 DualSense"><h3>Controle PS5 DualSense</h3><p>Feedback háptico</p><div class="preco">R$ 499,90</div><a class="btn" onclick="adicionarAoCarrinho('Controle PS5 DualSense','R$ 499,90')">Comprar</a></div>
+
+<div class="produto"><img src="img/game36.png" alt="Jogo Elden Ring PS5"><h3>Elden Ring PS5</h3><p>Mundo aberto e exploração</p><div class="preco">R$ 699,90</div><a class="btn" onclick="adicionarAoCarrinho('Elden Ring PS5','R$ 699,90')">Comprar</a></div>
+<div class="produto"><img src="img/game37.png" alt="Jogo Gran Turismo 7 Volante PS5"><h3>Gran Turismo 7 Volante PS5</h3><p>Simulação avançada</p><div class="preco">R$ 999,90</div><a class="btn" onclick="adicionarAoCarrinho('Gran Turismo 7 Volante PS5','R$ 999,90')">Comprar</a></div>
+<div class="produto"><img src="img/game38.png" alt="Console PS5 Edição Digital"><h3>Console PS5 Edição Digital</h3><p>Sem leitor de disco</p><div class="preco">R$ 4.299,90</div><a class="btn" onclick="adicionarAoCarrinho('Console PS5 Edição Digital','R$ 4.299,90')">Comprar</a></div>
+<div class="produto"><img src="img/game39.png" alt="Console PS5 Edição Standard"><h3>Console PS5 Edição Standard</h3><p>Versão completa</p><div class="preco">R$ 4.499,90</div><a class="btn" onclick="adicionarAoCarrinho('Console PS5 Edição Standard','R$ 4.499,90')">Comprar</a></div>
+<div class="produto"><img src="img/game40.png" alt="Console Xbox Series S"><h3>Console Xbox Series S</h3><p>Compacto e eficiente</p><div class="preco">R$ 3.999,90</div><a class="btn" onclick="adicionarAoCarrinho('Console Xbox Series S','R$ 3.999,90')">Comprar</a></div>
+<!-- FIM DOS PRODUTOS -->
+
+<!-- Aqui você insere os produtos do 11 ao 40, igual ao bloco que enviei anteriormente -->
+
+</div>
+</div>
+<!-- CARRINHO -->
+<div id="carrinho">
+  <h3>Carrinho</h3>
+  <p>Vazio</p>
+  <a href="checkout.html" class="checkout-btn">Finalizar Compra</a>
+</div>
+
+<!-- Modal de Imagem -->
+<div id="modalProduto" class="modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000;">
+  <span class="fechar" onclick="fecharModal()" style="cursor:pointer;font-size:28px;position:absolute;right:20px;top:10px;color:#fff;">&times;</span>
+  <img class="modal-conteudo" id="imgModal" style="max-width:90%; max-height:80vh; display:block; margin:60px auto 10px;">
+  <div id="caption" style="text-align:center;color:#fff;"></div>
+</div>
+
+<style>
+.checkout-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #007bff; /* azul */
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.checkout-btn:hover { background: #007bff; }
+
+.remove-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 2px 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.remove-btn:hover { background: #007bff; }
+</style>
+
+<script>
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+function salvarCarrinho(){
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function parsePrice(precoStr){
+  if(!precoStr) return 0;
+  let s = String(precoStr).trim().replace(/[^\d\.,-]/g,'');
+  s = s.replace(/\./g,'').replace(/,/g,'.');
+  const n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+}
+
+function atualizarCarrinho(){
+  const div=document.getElementById('carrinho');
+  if(carrinho.length===0){
+    div.innerHTML='<h3>Carrinho</h3><p>Vazio</p><a href="checkout.html" class="checkout-btn">Finalizar Compra</a>';
+    return;
+  }
+  let html='<h3>Carrinho</h3>';
+  let total = 0;
+  carrinho.forEach((item,index)=>{
+    let valor = parsePrice(item.preco);
+    total += valor;
+    html += `<p>${item.nome} - ${item.preco} <button class="remove-btn" onclick="removerDoCarrinho(${index})">x</button></p>`;
+  });
+  html += `<p><strong>Total de itens: ${carrinho.length}</strong></p>`;
+  html += `<p><strong>Valor total: R$ ${total.toFixed(2).replace('.',',')}</strong></p>`;
+  html += `<a href="checkout.html" class="checkout-btn">Finalizar Compra</a>`;
+  div.innerHTML = html;
+}
+
+// Controle do alerta para não repetir
+let alertaAtivo = false;
+
+function adicionarAoCarrinho(nome, preco){
+  carrinho.push({nome, preco});
+  salvarCarrinho();
+  atualizarCarrinho();
+  if(!alertaAtivo){
+    alertaAtivo = true;
+    alert(nome+' adicionado ao carrinho!');
+    alertaAtivo = false;
+  }
+}
+
+function removerDoCarrinho(index){
+  carrinho.splice(index,1);
+  salvarCarrinho();
+  atualizarCarrinho();
+}
+
+function toggleCarrinho(){
+  const div=document.getElementById('carrinho');
+  div.style.display = div.style.display==='block'?'none':'block';
+}
+
+function abrirModal(imgSrc, titulo){
+  document.getElementById("modalProduto").style.display = "block";
+  document.getElementById("imgModal").src = imgSrc;
+  document.getElementById("caption").innerHTML = titulo;
+}
+function fecharModal(){
+  document.getElementById("modalProduto").style.display = "none";
+}
+
+// Inicializa carrinho ao carregar a página
+document.addEventListener('DOMContentLoaded', atualizarCarrinho);
+</script>
+</body>
+</html>
