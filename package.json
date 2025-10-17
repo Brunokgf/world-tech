@@ -1,0 +1,28 @@
+{
+  "name": "world-tech-checkout",
+  "version": "1.0.0",
+  "description": "Projeto de checkout da World Tech com funções serverless",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev",
+    "build": "echo 'Build completo'"
+  },
+  "author": "Bruno Pedroso",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^3.4.0",
+    "@netlify/blob": "^1.0.0"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brunokgf/world-tech.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Brunokgf/world-tech/issues"
+  },
+  "homepage": "https://github.com/Brunokgf/world-tech#readme"
+}
