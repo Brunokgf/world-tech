@@ -27,32 +27,29 @@ async function escreverFila(fila) {
 
 // Função principal da Lambda
 export async function handler(event) {
+  // Função auxiliar para retorno de erro sempre em JSON
+  const retornoErro = (status, msg) => ({
+    statusCode: status,
+    body: JSON.stringify({ ok: false, erro: msg }),
+  });
+
   try {
     // Aceita apenas POST
     if (event.httpMethod !== 'POST') {
-      return {
-        statusCode: 405,
-        body: JSON.stringify({ ok: false, erro: 'Método não permitido' }),
-      };
+      return retornoErro(405, 'Método não permitido');
     }
 
     // Parse do body
     let pedido;
     try {
       pedido = JSON.parse(event.body);
-    } catch (err) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ ok: false, erro: 'Body inválido' }),
-      };
+    } catch {
+      return retornoErro(400, 'Body inválido');
     }
 
     // Valida campos obrigatórios
     if (!pedido.formaPagamento || !pedido.total) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ ok: false, erro: 'Total e formaPagamento obrigatórios' }),
-      };
+      return retornoErro(400, 'Total e formaPagamento obrigatórios');
     }
 
     // Adiciona pedido na fila
@@ -77,9 +74,6 @@ export async function handler(event) {
     };
   } catch (err) {
     console.error('Erro geral criarTransacao:', err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ ok: false, erro: err.message || 'Erro desconhecido' }),
-    };
+    return retornoErro(500, err.message || 'Erro desconhecido');
   }
 }
