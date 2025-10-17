@@ -1,4 +1,3 @@
-// /.netlify/functions/criarTransacao.js
 import fetch from 'node-fetch';
 import { getBlob, putBlob } from '@netlify/blob';
 
@@ -19,28 +18,42 @@ async function escreverFila(fila) {
 }
 
 export async function handler(event) {
-  if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Método não permitido' };
-
   try {
+    // 1️⃣ Apenas aceita POST
+    if (event.httpMethod !== 'POST') {
+      return {
+        statusCode: 405,
+        body: JSON.stringify({ ok: false, erro: 'Método não permitido' }),
+      };
+    }
+
+    // 2️⃣ Lê pedido do body
     const pedido = JSON.parse(event.body);
 
     if (!pedido.formaPagamento || !pedido.total) {
-      return { statusCode: 400, body: 'Total e formaPagamento obrigatórios' };
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ ok: false, erro: 'Total e formaPagamento obrigatórios' }),
+      };
     }
 
-    // 1️⃣ Adiciona pedido na fila
+    // 3️⃣ Adiciona pedido na fila
     const fila = await lerFila();
     fila.push({ id: Date.now().toString(), ...pedido });
     await escreverFila(fila);
 
-    // 2️⃣ Dispara processamento da fila até zerar
+    // 4️⃣ Dispara processamento da fila
     await fetch(`${process.env.URL_BASE}/.netlify/functions/processarFila`, { method: 'POST' });
 
+    // 5️⃣ Retorno OK
     return {
       statusCode: 200,
       body: JSON.stringify({ ok: true, msg: 'Pedido adicionado e será processado automaticamente' }),
     };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ ok: false, erro: err.message }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ ok: false, erro: err.message }),
+    };
   }
 }
