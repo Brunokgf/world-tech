@@ -335,7 +335,7 @@ $(document).ready(function() {
     };
     try {
       console.log('Enviando pedido para Netlify function:', pedido);
-      const res = await fetch('/.netlify/functions/criarTransacao', {
+      const res = await fetch('/.netlify/functions/criartransacao', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pedido)
