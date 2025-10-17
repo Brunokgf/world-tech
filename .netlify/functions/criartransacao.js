@@ -1,25 +1,34 @@
+// /.netlify/functions/criartransacao.js
 import fetch from 'node-fetch';
 import { getBlob, putBlob } from '@netlify/blob';
 
 const BLOBS_KEY = 'fila-pedidos';
 
+// Função para ler a fila de pedidos
 async function lerFila() {
   try {
     const blob = await getBlob(BLOBS_KEY);
     if (!blob) return [];
     return JSON.parse(await blob.text());
-  } catch {
+  } catch (err) {
+    console.error('Erro ao ler fila:', err);
     return [];
   }
 }
 
+// Função para escrever a fila de pedidos
 async function escreverFila(fila) {
-  await putBlob(BLOBS_KEY, JSON.stringify(fila, null, 2), { contentType: 'application/json' });
+  try {
+    await putBlob(BLOBS_KEY, JSON.stringify(fila, null, 2), { contentType: 'application/json' });
+  } catch (err) {
+    console.error('Erro ao escrever fila:', err);
+  }
 }
 
+// Função principal da Lambda
 export async function handler(event) {
   try {
-    // 1️⃣ Apenas aceita POST
+    // Aceita apenas POST
     if (event.httpMethod !== 'POST') {
       return {
         statusCode: 405,
@@ -27,9 +36,18 @@ export async function handler(event) {
       };
     }
 
-    // 2️⃣ Lê pedido do body
-    const pedido = JSON.parse(event.body);
+    // Parse do body
+    let pedido;
+    try {
+      pedido = JSON.parse(event.body);
+    } catch (err) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ ok: false, erro: 'Body inválido' }),
+      };
+    }
 
+    // Valida campos obrigatórios
     if (!pedido.formaPagamento || !pedido.total) {
       return {
         statusCode: 400,
@@ -37,23 +55,31 @@ export async function handler(event) {
       };
     }
 
-    // 3️⃣ Adiciona pedido na fila
+    // Adiciona pedido na fila
     const fila = await lerFila();
     fila.push({ id: Date.now().toString(), ...pedido });
     await escreverFila(fila);
 
-    // 4️⃣ Dispara processamento da fila
-    await fetch(`${process.env.URL_BASE}/.netlify/functions/processarFila`, { method: 'POST' });
+    // Dispara processamento da fila
+    if (process.env.URL_BASE) {
+      try {
+        await fetch(`${process.env.URL_BASE}/.netlify/functions/processarFila`, { method: 'POST' });
+      } catch (err) {
+        console.error('Erro ao chamar processarFila:', err);
+        // Não interrompe, apenas log
+      }
+    }
 
-    // 5️⃣ Retorno OK
+    // Retorno OK
     return {
       statusCode: 200,
       body: JSON.stringify({ ok: true, msg: 'Pedido adicionado e será processado automaticamente' }),
     };
   } catch (err) {
+    console.error('Erro geral criarTransacao:', err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, erro: err.message }),
+      body: JSON.stringify({ ok: false, erro: err.message || 'Erro desconhecido' }),
     };
   }
 }
